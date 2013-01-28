@@ -1,0 +1,24 @@
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\bin\Debug\NeuralWin.exe
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\bin\Debug\NeuralWin.pdb
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.csprojResolveAssemblyReference.cache
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.Form1.resources
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.Properties.Resources.resources
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.csproj.GenerateResource.Cache
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.exe
+c:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.pdb
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.exe
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.pdb
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.exe
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.pdb
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csprojResolveAssemblyReference.cache
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.Form1.resources
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.Properties.Resources.resources
+C:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csproj.GenerateResource.Cache
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.exe
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.pdb
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.exe
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.pdb
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csprojResolveAssemblyReference.cache
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.Properties.Resources.resources
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csproj.GenerateResource.Cache
+C:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.UIMainForm.resources
