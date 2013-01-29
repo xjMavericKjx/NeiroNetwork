@@ -100,7 +100,7 @@ namespace NeuralWin
         private string ErrorRate(int count)
         {
             _effectivity /= count;
-            _errorRate = (int)((1 - _effectivity) * 100);
+            _errorRate = (int)((1 - _effectivity));
 
             return _errorRate.ToString(CultureInfo.InvariantCulture) + "%";
         }
