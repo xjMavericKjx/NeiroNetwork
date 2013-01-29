@@ -51,7 +51,7 @@ namespace NeuralWin
             string line;
 
  
-            var file = new System.IO.StreamReader("heart3.dt");
+            var file = new System.IO.StreamReader("heart1.dt");
 
             while ((line = file.ReadLine()) != null)
             {
