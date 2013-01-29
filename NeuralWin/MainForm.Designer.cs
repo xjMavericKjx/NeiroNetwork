@@ -59,7 +59,7 @@
             // 
             // UIReadDataButton
             // 
-            this.UIReadDataButton.Location = new System.Drawing.Point(226, 12);
+            this.UIReadDataButton.Location = new System.Drawing.Point(12, 12);
             this.UIReadDataButton.Name = "UIReadDataButton";
             this.UIReadDataButton.Size = new System.Drawing.Size(208, 23);
             this.UIReadDataButton.TabIndex = 11;

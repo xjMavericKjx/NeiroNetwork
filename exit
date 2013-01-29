@@ -1,0 +1,2534 @@
+[33mcommit 7a3d0cf840057238a380e85fc248af029c1a3378[m
+Merge: d44c2b9 ecba98e
+Author: xjMavericKjx <maximaxim@tpu.ru>
+Date:   Mon Jan 28 23:30:33 2013 +0700
+
+    Merge branch 'master' of github.com:xjMavericKjx/NeiroNetwork
+
+[33mcommit d44c2b91217d522bf3d3089c9c549f64a8aaa7df[m
+Author: xjMavericKjx <maximaxim@tpu.ru>
+Date:   Mon Jan 28 22:46:33 2013 +0700
+
+    first commit
+
+[1mdiff --git a/NeuralWeb.sln b/NeuralWeb.sln[m
+[1mnew file mode 100644[m
+[1mindex 0000000..43fc272[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWeb.sln[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m﻿[m
+[32m+[m[32mMicrosoft Visual Studio Solution File, Format Version 12.00[m
+[32m+[m[32m# Visual Studio 2012[m
+[32m+[m[32mProject("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralWin", "NeuralWin\NeuralWin.csproj", "{E9E6BE70-5D89-4FD6-848B-CAEA172CE137}"[m
+[32m+[m[32mEndProject[m
+[32m+[m[32mGlobal[m
+[32m+[m	[32mGlobalSection(SolutionConfigurationPlatforms) = preSolution[m
+[32m+[m		[32mDebug|Any CPU = Debug|Any CPU[m
+[32m+[m		[32mRelease|Any CPU = Release|Any CPU[m
+[32m+[m	[32mEndGlobalSection[m
+[32m+[m	[32mGlobalSection(ProjectConfigurationPlatforms) = postSolution[m
+[32m+[m		[32m{E9E6BE70-5D89-4FD6-848B-CAEA172CE137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU[m
+[32m+[m		[32m{E9E6BE70-5D89-4FD6-848B-CAEA172CE137}.Debug|Any CPU.Build.0 = Debug|Any CPU[m
+[32m+[m		[32m{E9E6BE70-5D89-4FD6-848B-CAEA172CE137}.Release|Any CPU.ActiveCfg = Release|Any CPU[m
+[32m+[m		[32m{E9E6BE70-5D89-4FD6-848B-CAEA172CE137}.Release|Any CPU.Build.0 = Release|Any CPU[m
+[32m+[m	[32mEndGlobalSection[m
+[32m+[m	[32mGlobalSection(SolutionProperties) = preSolution[m
+[32m+[m		[32mHideSolutionNode = FALSE[m
+[32m+[m	[32mEndGlobalSection[m
+[32m+[m[32mEndGlobal[m
+[1mdiff --git a/NeuralWeb.suo b/NeuralWeb.suo[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3637216[m
+Binary files /dev/null and b/NeuralWeb.suo differ
+[1mdiff --git a/NeuralWeb.v11.suo b/NeuralWeb.v11.suo[m
+[1mnew file mode 100644[m
+[1mindex 0000000..aca061d[m
+Binary files /dev/null and b/NeuralWeb.v11.suo differ
+[1mdiff --git a/NeuralWin/Filereader.cs b/NeuralWin/Filereader.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..cd35bb9[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Filereader.cs[m
+[36m@@ -0,0 +1,92 @@[m
+[32m+[m[32m﻿using System;[m
+[32m+[m[32musing System.Collections;[m
+[32m+[m[32musing System.Collections.Generic;[m
+[32m+[m[32musing System.Linq;[m
+[32m+[m[32musing System.Text;[m
+[32m+[m
+[32m+[m[32mnamespace NeuralWin[m
+[32m+[m[32m{[m
+[32m+[m[32m    class FileReader[m
+[32m+[m[32m    {[m
+[32m+[m[32m        private readonly ArrayList _datasetEntrance;[m
+[32m+[m[32m        private readonly ArrayList _datasetValid;[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public double[] GetTrainingDatasetEntrance(int row)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return (double[])_datasetEntrance[row];[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public double[] GetTrainingDatasetValid(int row)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return (double[])_datasetValid[row];[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public double[] GetValidDatasetEntrance(int row)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return (double[])_datasetEntrance[460+row];[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public double[] GetValidDatasetValid(int row)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return (double[])_datasetValid[460+row];[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public double[] GetTestDatasetEntrance(int row)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return (double[])_datasetEntrance[460+230+row];[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public double[] GetTestDatasetValid(int row)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return (double[])_datasetValid[460+230+row];[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public FileReader()[m
+[32m+[m[32m        {[m
+[32m+[m[32m            _datasetEntrance = new ArrayList();[m
+[32m+[m[32m            _datasetValid = new ArrayList();[m
+[32m+[m
+[32m+[m[32m            int _counter = 0;[m
+[32m+[m[32m            string line;[m
+[32m+[m
+[32m+[m[41m [m
+[32m+[m[32m            var file = new System.IO.StreamReader("heart3.dt");[m
+[32m+[m
+[32m+[m[32m            while ((line = file.ReadLine()) != null)[m
+[32m+[m[32m            {[m
+[32m+[m
+[32m+[m[32m                var entranceValues = new double[35];[m
+[32m+[m[32m                var validValues = new double[2];[m
+[32m+[m[32m                String s;[m
+[32m+[m[32m                int k = 0;[m
+[32m+[m[32m                while (k < 35)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    s = line.Substring(0, line.IndexOf(" "));[m
+[32m+[m[32m                    s = s.Replace(".", ",");[m
+[32m+[m[32m                    entranceValues[k] = Convert.ToDouble(s);[m
+[32m+[m[32m                    line = line.Substring(line.IndexOf(" ") + 1, line.Length - line.IndexOf(" ") - 1);[m
+[32m+[m[32m                    k++;[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                k = 0;[m
+[32m+[m
+[32m+[m[32m                s = line.Substring(0, line.IndexOf(" "));[m
+[32m+[m[32m                s = s.Replace(".", ",");[m
+[32m+[m[32m                validValues[0] = Convert.ToDouble(s);[m
+[32m+[m[32m                line = line.Substring(line.IndexOf(" ") + 1, line.Length - line.IndexOf(" ") - 1);[m
+[32m+[m
+[32m+[m[32m                s = line.Replace(".", ",");[m
+[32m+[m[32m                validValues[1] = Convert.ToDouble(s);[m
+[32m+[m[32m                line = line.Substring(line.IndexOf(" ") + 1, line.Length - line.IndexOf(" ") - 1);[m
+[32m+[m
+[32m+[m
+[32m+[m[32m                _datasetEntrance.Add(entranceValues);[m
+[32m+[m[32m                _datasetValid.Add(validValues);[m
+[32m+[m
+[32m+[m[32m                _counter++;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            file.Close();[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/NeuralWin/MainForm.Designer.cs b/NeuralWin/MainForm.Designer.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e5ca9c9[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/MainForm.Designer.cs[m
+[36m@@ -0,0 +1,170 @@[m
+[32m+[m[32m﻿namespace NeuralWin[m
+[32m+[m[32m{[m
+[32m+[m[32m    partial class UIMainForm[m
+[32m+[m[32m    {[m
+[32m+[m[32m        /// <summary>[m
+[32m+[m[32m        /// Required designer variable.[m
+[32m+[m[32m        /// </summary>[m
+[32m+[m[32m        private System.ComponentModel.IContainer components = null;[m
+[32m+[m
+[32m+[m[32m        /// <summary>[m
+[32m+[m[32m        /// Clean up any resources being used.[m
+[32m+[m[32m        /// </summary>[m
+[32m+[m[32m        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>[m
+[32m+[m[32m        protected override void Dispose(bool disposing)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            if (disposing && (components != null))[m
+[32m+[m[32m            {[m
+[32m+[m[32m                components.Dispose();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            base.Dispose(disposing);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        #region Windows Form Designer generated code[m
+[32m+[m
+[32m+[m[32m        /// <summary>[m
+[32m+[m[32m        /// Required method for Designer support - do not modify[m
+[32m+[m[32m        /// the contents of this method with the code editor.[m
+[32m+[m[32m        /// </summary>[m
+[32m+[m[32m        private void InitializeComponent()[m
+[32m+[m[32m        {[m
+[32m+[m[32m            this.UIErrorRateOnTrainingDataTextBox = new System.Windows.Forms.TextBox();[m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton = new System.Windows.Forms.Button();[m
+[32m+[m[32m            this.UIReadDataButton = new System.Windows.Forms.Button();[m
+[32m+[m[32m            this.UICheckOnTrainingDataButton = new System.Windows.Forms.Button();[m
+[32m+[m[32m            this.UICheckOnValidateDataButton = new System.Windows.Forms.Button();[m
+[32m+[m[32m            this.UIErrorRateOnValidateDataTextBox = new System.Windows.Forms.TextBox();[m
+[32m+[m[32m            this.UICheckOnTestDataButton = new System.Windows.Forms.Button();[m
+[32m+[m[32m            this.UIErrorRateOnTestDataTextBox = new System.Windows.Forms.TextBox();[m
+[32m+[m[32m            this.UIEducationOnValidateDataButton = new System.Windows.Forms.Button();[m
+[32m+[m[32m            this.UIEducationOnTestDataButton = new System.Windows.Forms.Button();[m
+[32m+[m[32m            this.SuspendLayout();[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIErrorRateOnTrainingDataTextBox[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UIErrorRateOnTrainingDataTextBox.Location = new System.Drawing.Point(90, 99);[m
+[32m+[m[32m            this.UIErrorRateOnTrainingDataTextBox.Name = "UIErrorRateOnTrainingDataTextBox";[m
+[32m+[m[32m            this.UIErrorRateOnTrainingDataTextBox.Size = new System.Drawing.Size(46, 20);[m
+[32m+[m[32m            this.UIErrorRateOnTrainingDataTextBox.TabIndex = 8;[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIEducationOnTrainingDataButton[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton.Location = new System.Drawing.Point(12, 41);[m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton.Name = "UIEducationOnTrainingDataButton";[m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton.Size = new System.Drawing.Size(208, 23);[m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton.TabIndex = 9;[m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton.Text = "Обучение на обучающей выборке";[m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            this.UIEducationOnTrainingDataButton.Click += new System.EventHandler(this.UIEducationOnTrainingDataButton_Click);[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIReadDataButton[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UIReadDataButton.Location = new System.Drawing.Point(226, 12);[m
+[32m+[m[32m            this.UIReadDataButton.Name = "UIReadDataButton";[m
+[32m+[m[32m            this.UIReadDataButton.Size = new System.Drawing.Size(208, 23);[m
+[32m+[m[32m            this.UIReadDataButton.TabIndex = 11;[m
+[32m+[m[32m            this.UIReadDataButton.Text = "Загрузить данные";[m
+[32m+[m[32m            this.UIReadDataButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            this.UIReadDataButton.Click += new System.EventHandler(this.UIReadDataButton_Click);[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UICheckOnTrainingDataButton[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UICheckOnTrainingDataButton.Location = new System.Drawing.Point(12, 70);[m
+[32m+[m[32m            this.UICheckOnTrainingDataButton.Name = "UICheckOnTrainingDataButton";[m
+[32m+[m[32m            this.UICheckOnTrainingDataButton.Size = new System.Drawing.Size(208, 23);[m
+[32m+[m[32m            this.UICheckOnTrainingDataButton.TabIndex = 12;[m
+[32m+[m[32m            this.UICheckOnTrainingDataButton.Text = "Проверка на обучающей выборке";[m
+[32m+[m[32m            this.UICheckOnTrainingDataButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            this.UICheckOnTrainingDataButton.Click += new System.EventHandler(this.UICheckOnTrainingDataButton_Click);[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UICheckOnValidateDataButton[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UICheckOnValidateDataButton.Location = new System.Drawing.Point(226, 70);[m
+[32m+[m[32m            this.UICheckOnValidateDataButton.Name = "UICheckOnValidateDataButton";[m
+[32m+[m[32m            this.UICheckOnValidateDataButton.Size = new System.Drawing.Size(208, 23);[m
+[32m+[m[32m            this.UICheckOnValidateDataButton.TabIndex = 15;[m
+[32m+[m[32m            this.UICheckOnValidateDataButton.Text = "Проверка на валидационной выборке";[m
+[32m+[m[32m            this.UICheckOnValidateDataButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            this.UICheckOnValidateDataButton.Click += new System.EventHandler(this.UICheckOnValidateDataButton_Click);[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIErrorRateOnValidateDataTextBox[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UIErrorRateOnValidateDataTextBox.Location = new System.Drawing.Point(309, 99);[m
+[32m+[m[32m            this.UIErrorRateOnValidateDataTextBox.Name = "UIErrorRateOnValidateDataTextBox";[m
+[32m+[m[32m            this.UIErrorRateOnValidateDataTextBox.Size = new System.Drawing.Size(46, 20);[m
+[32m+[m[32m            this.UIErrorRateOnValidateDataTextBox.TabIndex = 13;[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UICheckOnTestDataButton[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UICheckOnTestDataButton.Location = new System.Drawing.Point(440, 70);[m
+[32m+[m[32m            this.UICheckOnTestDataButton.Name = "UICheckOnTestDataButton";[m
+[32m+[m[32m            this.UICheckOnTestDataButton.Size = new System.Drawing.Size(208, 23);[m
+[32m+[m[32m            this.UICheckOnTestDataButton.TabIndex = 18;[m
+[32m+[m[32m            this.UICheckOnTestDataButton.Text = "Проверка на тестовой выборке";[m
+[32m+[m[32m            this.UICheckOnTestDataButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            this.UICheckOnTestDataButton.Click += new System.EventHandler(this.UICheckOnTestDataButton_Click);[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIErrorRateOnTestDataTextBox[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UIErrorRateOnTestDataTextBox.Location = new System.Drawing.Point(528, 99);[m
+[32m+[m[32m            this.UIErrorRateOnTestDataTextBox.Name = "UIErrorRateOnTestDataTextBox";[m
+[32m+[m[32m            this.UIErrorRateOnTestDataTextBox.Size = new System.Drawing.Size(46, 20);[m
+[32m+[m[32m            this.UIErrorRateOnTestDataTextBox.TabIndex = 16;[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIEducationOnValidateDataButton[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UIEducationOnValidateDataButton.Location = new System.Drawing.Point(226, 41);[m
+[32m+[m[32m            this.UIEducationOnValidateDataButton.Name = "UIEducationOnValidateDataButton";[m
+[32m+[m[32m            this.UIEducationOnValidateDataButton.Size = new System.Drawing.Size(208, 23);[m
+[32m+[m[32m            this.UIEducationOnValidateDataButton.TabIndex = 19;[m
+[32m+[m[32m            this.UIEducationOnValidateDataButton.Text = "Обучение на валидационной выборке";[m
+[32m+[m[32m            this.UIEducationOnValidateDataButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            this.UIEducationOnValidateDataButton.Click += new System.EventHandler(this.UIEducationOnValidateDataButton_Click);[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIEducationOnTestDataButton[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.UIEducationOnTestDataButton.Location = new System.Drawing.Point(440, 41);[m
+[32m+[m[32m            this.UIEducationOnTestDataButton.Name = "UIEducationOnTestDataButton";[m
+[32m+[m[32m            this.UIEducationOnTestDataButton.Size = new System.Drawing.Size(208, 23);[m
+[32m+[m[32m            this.UIEducationOnTestDataButton.TabIndex = 20;[m
+[32m+[m[32m            this.UIEducationOnTestDataButton.Text = "Обучение на тестовой выборке";[m
+[32m+[m[32m            this.UIEducationOnTestDataButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            this.UIEducationOnTestDataButton.Click += new System.EventHandler(this.UIEducationOnTestDataButton_Click);[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            // UIMainForm[m
+[32m+[m[32m            //[m[41m [m
+[32m+[m[32m            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);[m
+[32m+[m[32m            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;[m
+[32m+[m[32m            this.ClientSize = new System.Drawing.Size(660, 132);[m
+[32m+[m[32m            this.Controls.Add(this.UIEducationOnTestDataButton);[m
+[32m+[m[32m            this.Controls.Add(this.UIEducationOnValidateDataButton);[m
+[32m+[m[32m            this.Controls.Add(this.UICheckOnTestDataButton);[m
+[32m+[m[32m            this.Controls.Add(this.UIErrorRateOnTestDataTextBox);[m
+[32m+[m[32m            this.Controls.Add(this.UICheckOnValidateDataButton);[m
+[32m+[m[32m            this.Controls.Add(this.UIErrorRateOnValidateDataTextBox);[m
+[32m+[m[32m            this.Controls.Add(this.UICheckOnTrainingDataButton);[m
+[32m+[m[32m            this.Controls.Add(this.UIReadDataButton);[m
+[32m+[m[32m            this.Controls.Add(this.UIEducationOnTrainingDataButton);[m
+[32m+[m[32m            this.Controls.Add(this.UIErrorRateOnTrainingDataTextBox);[m
+[32m+[m[32m            this.Name = "UIMainForm";[m
+[32m+[m[32m            this.Text = "Нейронная сеть";[m
+[32m+[m[32m            this.ResumeLayout(false);[m
+[32m+[m[32m            this.PerformLayout();[m
+[32m+[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        #endregion[m
+[32m+[m
+[32m+[m[32m        private System.Windows.Forms.TextBox UIErrorRateOnTrainingDataTextBox;[m
+[32m+[m[32m        private System.Windows.Forms.Button UIEducationOnTrainingDataButton;[m
+[32m+[m[32m        private System.Windows.Forms.Button UIReadDataButton;[m
+[32m+[m[32m        private System.Windows.Forms.Button UICheckOnTrainingDataButton;[m
+[32m+[m[32m        private System.Windows.Forms.Button UICheckOnValidateDataButton;[m
+[32m+[m[32m        private System.Windows.Forms.TextBox UIErrorRateOnValidateDataTextBox;[m
+[32m+[m[32m        private System.Windows.Forms.Button UICheckOnTestDataButton;[m
+[32m+[m[32m        private System.Windows.Forms.TextBox UIErrorRateOnTestDataTextBox;[m
+[32m+[m[32m        private System.Windows.Forms.Button UIEducationOnValidateDataButton;[m
+[32m+[m[32m        private System.Windows.Forms.Button UIEducationOnTestDataButton;[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[1mdiff --git a/NeuralWin/MainForm.cs b/NeuralWin/MainForm.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..96bbc0f[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/MainForm.cs[m
+[36m@@ -0,0 +1,108 @@[m
+[32m+[m[32m﻿using System;[m
+[32m+[m[32musing System.Globalization;[m
+[32m+[m[32musing System.Windows.Forms;[m
+[32m+[m
+[32m+[m[32mnamespace NeuralWin[m
+[32m+[m[32m{[m
+[32m+[m[32m    public partial class UIMainForm : Form[m
+[32m+[m[32m    {[m
+[32m+[m[32m        public UIMainForm()[m
+[32m+[m[32m        {[m
+[32m+[m[32m            InitializeComponent();[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        Network _network;[m
+[32m+[m[32m        FileReader _inputFile;[m
+[32m+[m[32m        private double _effectivity;[m
+[32m+[m[32m        private int _errorRate;[m
+[32m+[m
+[32m+[m[32m        private void UIReadDataButton_Click(object sender, EventArgs e)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            _inputFile = new FileReader();[m
+[32m+[m[32m            _network = new Network(35);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void UIEducationOnTrainingDataButton_Click(object sender, EventArgs e)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            for (int j=0; j<100;j++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                for (int i = 0; i < 460; i++)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    _network.Teach(_inputFile.GetTrainingDatasetEntrance(i), _inputFile.GetTrainingDatasetValid(i));[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void UIEducationOnValidateDataButton_Click(object sender, EventArgs e)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            for (int j = 0; j < 100; j++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                for (int i = 0; i < 230; i++)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    _network.Teach(_inputFile.GetValidDatasetEntrance(i), _inputFile.GetValidDatasetValid(i));[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void UIEducationOnTestDataButton_Click(object sender, EventArgs e)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            for (int j = 0; j < 100; j++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                for (int i = 0; i < 230; i++)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    _network.Teach(_inputFile.GetTestDatasetEntrance(i), _inputFile.GetTestDatasetValid(i));[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void UICheckOnTrainingDataButton_Click(object sender, EventArgs e)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            _effectivity = 0;[m
+[32m+[m[41m           [m
+[32m+[m[32m            for (int i = 0; i < 460; i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                if (_network.Validate(_inputFile.GetTrainingDatasetEntrance(i), _inputFile.GetTrainingDatasetValid(i)))[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    _effectivity++;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m[41m              [m
+[32m+[m[32m            UIErrorRateOnTrainingDataTextBox.Text = ErrorRate(460);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void UICheckOnValidateDataButton_Click(object sender, EventArgs e)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            _effectivity = 0;[m
+[32m+[m
+[32m+[m[32m            for (int i = 0; i < 230; i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                if (_network.Validate(_inputFile.GetValidDatasetEntrance(i), _inputFile.GetValidDatasetValid(i)))[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    _effectivity++;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m            UIErrorRateOnValidateDataTextBox.Text = ErrorRate(230);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void UICheckOnTestDataButton_Click(object sender, EventArgs e)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            _effectivity = 0;[m
+[32m+[m
+[32m+[m[32m            for (int i = 0; i < 230; i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                if (_network.Validate(_inputFile.GetTestDatasetEntrance(i), _inputFile.GetTestDatasetValid(i)))[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    _effectivity++;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m            UIErrorRateOnTestDataTextBox.Text = ErrorRate(230);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private string ErrorRate(int count)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            _effectivity /= count;[m
+[32m+[m[32m            _errorRate = (int)((1 - _effectivity) * 100);[m
+[32m+[m
+[32m+[m[32m            return _errorRate.ToString(CultureInfo.InvariantCulture) + "%";[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/NeuralWin/MainForm.resx b/NeuralWin/MainForm.resx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1af7de1[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/MainForm.resx[m
+[36m@@ -0,0 +1,120 @@[m
+[32m+[m[32m﻿<?xml version="1.0" encoding="utf-8"?>[m
+[32m+[m[32m<root>[m
+[32m+[m[32m  <!--[m[41m [m
+[32m+[m[32m    Microsoft ResX Schema[m[41m [m
+[32m+[m[41m    [m
+[32m+[m[32m    Version 2.0[m
+[32m+[m[41m    [m
+[32m+[m[32m    The primary goals of this format is to allow a simple XML format[m[41m [m
+[32m+[m[32m    that is mostly human readable. The generation and parsing of the[m[41m [m
+[32m+[m[32m    various data types are done through the TypeConverter classes[m[41m [m
+[32m+[m[32m    associated with the data types.[m
+[32m+[m[41m    [m
+[32m+[m[32m    Example:[m
+[32m+[m[41m    [m
+[32m+[m[32m    ... ado.net/XML headers & schema ...[m
+[32m+[m[32m    <resheader name="resmimetype">text/microsoft-resx</resheader>[m
+[32m+[m[32m    <resheader name="version">2.0</resheader>[m
+[32m+[m[32m    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>[m
+[32m+[m[32m    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>[m
+[32m+[m[32m    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>[m
+[32m+[m[32m    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>[m
+[32m+[m[32m    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">[m
+[32m+[m[32m        <value>[base64 mime encoded serialized .NET Framework object]</value>[m
+[32m+[m[32m    </data>[m
+[32m+[m[32m    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">[m
+[32m+[m[32m        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>[m
+[32m+[m[32m        <comment>This is a comment</comment>[m
+[32m+[m[32m    </data>[m
+[32m+[m[41m                [m
+[32m+[m[32m    There are any number of "resheader" rows that contain simple[m[41m [m
+[32m+[m[32m    name/value pairs.[m
+[32m+[m[41m    [m
+[32m+[m[32m    Each data row contains a name, and value. The row also contains a[m[41m [m
+[32m+[m[32m    type or mimetype. Type corresponds to a .NET class that support[m[41m [m
+[32m+[m[32m    text/value conversion through the TypeConverter architecture.[m[41m [m
+[32m+[m[32m    Classes that don't support this are serialized and stored with the[m[41m [m
+[32m+[m[32m    mimetype set.[m
+[32m+[m[41m    [m
+[32m+[m[32m    The mimetype is used for serialized objects, and tells the[m[41m [m
+[32m+[m[32m    ResXResourceReader how to depersist the object. This is currently not[m[41m [m
+[32m+[m[32m    extensible. For a given mimetype the value must be set accordingly:[m
+[32m+[m[41m    [m
+[32m+[m[32m    Note - application/x-microsoft.net.object.binary.base64 is the format[m[41m [m
+[32m+[m[32m    that the ResXResourceWriter will generate, however the reader can[m[41m [m
+[32m+[m[32m    read any of the formats listed below.[m
+[32m+[m[41m    [m
+[32m+[m[32m    mimetype: application/x-microsoft.net.object.binary.base64[m
+[32m+[m[32m    value   : The object must be serialized with[m[41m [m
+[32m+[m[32m            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter[m
+[32m+[m[32m            : and then encoded with base64 encoding.[m
+[32m+[m[41m    [m
+[32m+[m[32m    mimetype: application/x-microsoft.net.object.soap.base64[m
+[32m+[m[32m    value   : The object must be serialized with[m[41m [m
+[32m+[m[32m            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter[m
+[32m+[m[32m            : and then encoded with base64 encoding.[m
+[32m+[m
+[32m+[m[32m    mimetype: application/x-microsoft.net.object.bytearray.base64[m
+[32m+[m[32m    value   : The object must be serialized into a byte array[m[41m [m
+[32m+[m[32m            : using a System.ComponentModel.TypeConverter[m
+[32m+[m[32m            : and then encoded with base64 encoding.[m
+[32m+[m[32m    -->[m
+[32m+[m[32m  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">[m
+[32m+[m[32m    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />[m
+[32m+[m[32m    <xsd:element name="root" msdata:IsDataSet="true">[m
+[32m+[m[32m      <xsd:complexType>[m
+[32m+[m[32m        <xsd:choice maxOccurs="unbounded">[m
+[32m+[m[32m          <xsd:element name="metadata">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:sequence>[m
+[32m+[m[32m                <xsd:element name="value" type="xsd:string" minOccurs="0" />[m
+[32m+[m[32m              </xsd:sequence>[m
+[32m+[m[32m              <xsd:attribute name="name" use="required" type="xsd:string" />[m
+[32m+[m[32m              <xsd:attribute name="type" type="xsd:string" />[m
+[32m+[m[32m              <xsd:attribute name="mimetype" type="xsd:string" />[m
+[32m+[m[32m              <xsd:attribute ref="xml:space" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m          <xsd:element name="assembly">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:attribute name="alias" type="xsd:string" />[m
+[32m+[m[32m              <xsd:attribute name="name" type="xsd:string" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m          <xsd:element name="data">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:sequence>[m
+[32m+[m[32m                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />[m
+[32m+[m[32m                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />[m
+[32m+[m[32m              </xsd:sequence>[m
+[32m+[m[32m              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />[m
+[32m+[m[32m              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />[m
+[32m+[m[32m              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />[m
+[32m+[m[32m              <xsd:attribute ref="xml:space" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m          <xsd:element name="resheader">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:sequence>[m
+[32m+[m[32m                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />[m
+[32m+[m[32m              </xsd:sequence>[m
+[32m+[m[32m              <xsd:attribute name="name" type="xsd:string" use="required" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m        </xsd:choice>[m
+[32m+[m[32m      </xsd:complexType>[m
+[32m+[m[32m    </xsd:element>[m
+[32m+[m[32m  </xsd:schema>[m
+[32m+[m[32m  <resheader name="resmimetype">[m
+[32m+[m[32m    <value>text/microsoft-resx</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m  <resheader name="version">[m
+[32m+[m[32m    <value>2.0</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m  <resheader name="reader">[m
+[32m+[m[32m    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m  <resheader name="writer">[m
+[32m+[m[32m    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m</root>[m
+\ No newline at end of file[m
+[1mdiff --git a/NeuralWin/Network.cs b/NeuralWin/Network.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..88fa9c5[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Network.cs[m
+[36m@@ -0,0 +1,113 @@[m
+[32m+[m[32m﻿using System;[m
+[32m+[m[32musing System.Linq;[m
+[32m+[m
+[32m+[m
+[32m+[m[32mnamespace NeuralWin[m
+[32m+[m[32m{[m
+[32m+[m[32m    public class Network[m
+[32m+[m[32m    {[m
+[32m+[m[32m        public Neuron[] InputLayer = new Neuron[35];[m
+[32m+[m[32m        public Neuron[] IntermediateLayer = new Neuron[18];[m
+[32m+[m[32m        public Neuron[] OutputLayer = new Neuron[2];[m
+[32m+[m
+[32m+[m[32m        public Network(int entrancesNumber)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var r = new Random();[m
+[32m+[m[32m            FillNeyronLayer(InputLayer, r, entrancesNumber);[m
+[32m+[m[32m            FillNeyronLayer(IntermediateLayer, r, InputLayer.Count());[m
+[32m+[m[32m            FillNeyronLayer(OutputLayer, r, IntermediateLayer.Count());[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void FillNeyronLayer(Neuron[] layer, Random rnd, int entrancesNumber)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            for (int i = 0; i < layer.Count(); i++)[m
+[32m+[m[32m                layer[i] = new Neuron(entrancesNumber, rnd.Next(1000000));[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public bool Validate(double[] entranceValues, double[] validValues)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var currentResultsOfNetworkWork = Entrance(entranceValues);[m
+[32m+[m
+[32m+[m[32m            var d = new double[2];[m
+[32m+[m[32m            if (currentResultsOfNetworkWork[0] >= currentResultsOfNetworkWork[1])[m
+[32m+[m[32m            {[m
+[32m+[m[32m                d[0] = 1;[m
+[32m+[m[32m                d[1] = 0;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else[m
+[32m+[m[32m            {[m
+[32m+[m[32m                d[0] = 0;[m
+[32m+[m[32m                d[1] = 1;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return ((validValues[0] == d[0]) && (validValues[1] == d[1]));[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public double[] Entrance(double[] entranceValue)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return GetLayerEntrance(OutputLayer,[m
+[32m+[m[32m                   GetLayerEntrance(IntermediateLayer,[m
+[32m+[m[32m                   GetLayerEntrance(InputLayer, entranceValue)));[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private double[] GetLayerEntrance(Neuron[] layer, double[] inputValue)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            foreach (var value in layer)[m
+[32m+[m[32m                value.Entrance(inputValue);[m
+[32m+[m
+[32m+[m[32m            var intermediateResult = new double[layer.Count()];[m
+[32m+[m[32m            for (int i = 0; i < layer.Count(); i++)[m
+[32m+[m[32m                intermediateResult[i] = layer[i].ActivateFunction();[m
+[32m+[m[32m            return intermediateResult;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public void Teach(double[] entranceValues, double[] validValues)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var currentResultsOfNetworkWork = Entrance(entranceValues);[m
+[32m+[m[32m            const double alpha = 1;[m
+[32m+[m
+[32m+[m[32m            var outputLayerError = new double[2];[m
+[32m+[m
+[32m+[m[32m            for (int i = 0; i < outputLayerError.Count(); i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                outputLayerError[i] = alpha * currentResultsOfNetworkWork[i] * (1 - currentResultsOfNetworkWork[i])[m[41m [m
+[32m+[m[32m                    * (currentResultsOfNetworkWork[i] - validValues[i]);[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m            double[] intermediateLayerError = ErrorInLayer(alpha, IntermediateLayer, OutputLayer, outputLayerError);[m
+[32m+[m[32m            double[] inputLayerError = ErrorInLayer(alpha, InputLayer, IntermediateLayer, intermediateLayerError);[m
+[32m+[m
+[32m+[m[32m            CorrectionLayerWeight(InputLayer, inputLayerError);[m
+[32m+[m[32m            CorrectionLayerWeight(IntermediateLayer, intermediateLayerError);[m
+[32m+[m[32m            CorrectionLayerWeight(OutputLayer, outputLayerError);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private double[] ErrorInLayer(double alpha, Neuron[] currentLayer, Neuron[] nextLayer, double[] nextLayerError)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var layerError = new double[currentLayer.Count()];[m
+[32m+[m
+[32m+[m[32m            for (int i = 0; i < layerError.Count(); i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                double weight = 0;[m
+[32m+[m[32m                for (int j = 0; j < nextLayer.Count(); j++)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    weight += nextLayer[j].EntrancesWeight[i] * nextLayerError[j];[m
+[32m+[m[32m                }[m
+[32m+[m[32m                layerError[i] = alpha * currentLayer[i].ActivateFunction() * (1 - currentLayer[i].ActivateFunction()) * weight;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return layerError;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        private void CorrectionLayerWeight(Neuron[] layer, double[] layerError)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            const double learningSpeed = 0.8;[m
+[32m+[m[32m            for (int j = 0; j < layer.Count(); j++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                for (int i = 0; i < layer[j].EntrancesWeight.Count(); i++)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    var delta = (-1) * learningSpeed * layerError[j] * layer[j].EntranceValue[i];[m
+[32m+[m[32m                    layer[j].EntrancesWeight[i] += delta;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/NeuralWin/NeuralWin.csproj b/NeuralWin/NeuralWin.csproj[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3535605[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/NeuralWin.csproj[m
+[36m@@ -0,0 +1,88 @@[m
+[32m+[m[32m﻿<?xml version="1.0" encoding="utf-8"?>[m
+[32m+[m[32m<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">[m
+[32m+[m[32m  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />[m
+[32m+[m[32m  <PropertyGroup>[m
+[32m+[m[32m    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>[m
+[32m+[m[32m    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>[m
+[32m+[m[32m    <ProjectGuid>{E9E6BE70-5D89-4FD6-848B-CAEA172CE137}</ProjectGuid>[m
+[32m+[m[32m    <OutputType>WinExe</OutputType>[m
+[32m+[m[32m    <AppDesignerFolder>Properties</AppDesignerFolder>[m
+[32m+[m[32m    <RootNamespace>NeuralWin</RootNamespace>[m
+[32m+[m[32m    <AssemblyName>NeuralWin</AssemblyName>[m
+[32m+[m[32m    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>[m
+[32m+[m[32m    <FileAlignment>512</FileAlignment>[m
+[32m+[m[32m  </PropertyGroup>[m
+[32m+[m[32m  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">[m
+[32m+[m[32m    <PlatformTarget>AnyCPU</PlatformTarget>[m
+[32m+[m[32m    <DebugSymbols>true</DebugSymbols>[m
+[32m+[m[32m    <DebugType>full</DebugType>[m
+[32m+[m[32m    <Optimize>false</Optimize>[m
+[32m+[m[32m    <OutputPath>bin\Debug\</OutputPath>[m
+[32m+[m[32m    <DefineConstants>DEBUG;TRACE</DefineConstants>[m
+[32m+[m[32m    <ErrorReport>prompt</ErrorReport>[m
+[32m+[m[32m    <WarningLevel>4</WarningLevel>[m
+[32m+[m[32m  </PropertyGroup>[m
+[32m+[m[32m  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">[m
+[32m+[m[32m    <PlatformTarget>AnyCPU</PlatformTarget>[m
+[32m+[m[32m    <DebugType>pdbonly</DebugType>[m
+[32m+[m[32m    <Optimize>true</Optimize>[m
+[32m+[m[32m    <OutputPath>bin\Release\</OutputPath>[m
+[32m+[m[32m    <DefineConstants>TRACE</DefineConstants>[m
+[32m+[m[32m    <ErrorReport>prompt</ErrorReport>[m
+[32m+[m[32m    <WarningLevel>4</WarningLevel>[m
+[32m+[m[32m  </PropertyGroup>[m
+[32m+[m[32m  <ItemGroup>[m
+[32m+[m[32m    <Reference Include="System" />[m
+[32m+[m[32m    <Reference Include="System.Core" />[m
+[32m+[m[32m    <Reference Include="System.Xml.Linq" />[m
+[32m+[m[32m    <Reference Include="System.Data.DataSetExtensions" />[m
+[32m+[m[32m    <Reference Include="Microsoft.CSharp" />[m
+[32m+[m[32m    <Reference Include="System.Data" />[m
+[32m+[m[32m    <Reference Include="System.Deployment" />[m
+[32m+[m[32m    <Reference Include="System.Drawing" />[m
+[32m+[m[32m    <Reference Include="System.Windows.Forms" />[m
+[32m+[m[32m    <Reference Include="System.Xml" />[m
+[32m+[m[32m  </ItemGroup>[m
+[32m+[m[32m  <ItemGroup>[m
+[32m+[m[32m    <Compile Include="Filereader.cs" />[m
+[32m+[m[32m    <Compile Include="MainForm.cs">[m
+[32m+[m[32m      <SubType>Form</SubType>[m
+[32m+[m[32m    </Compile>[m
+[32m+[m[32m    <Compile Include="MainForm.Designer.cs">[m
+[32m+[m[32m      <DependentUpon>MainForm.cs</DependentUpon>[m
+[32m+[m[32m    </Compile>[m
+[32m+[m[32m    <Compile Include="Neuron.cs" />[m
+[32m+[m[32m    <Compile Include="Network.cs" />[m
+[32m+[m[32m    <Compile Include="Program.cs" />[m
+[32m+[m[32m    <Compile Include="Properties\AssemblyInfo.cs" />[m
+[32m+[m[32m    <EmbeddedResource Include="MainForm.resx">[m
+[32m+[m[32m      <DependentUpon>MainForm.cs</DependentUpon>[m
+[32m+[m[32m    </EmbeddedResource>[m
+[32m+[m[32m    <EmbeddedResource Include="Properties\Resources.resx">[m
+[32m+[m[32m      <Generator>ResXFileCodeGenerator</Generator>[m
+[32m+[m[32m      <LastGenOutput>Resources.Designer.cs</LastGenOutput>[m
+[32m+[m[32m      <SubType>Designer</SubType>[m
+[32m+[m[32m    </EmbeddedResource>[m
+[32m+[m[32m    <Compile Include="Properties\Resources.Designer.cs">[m
+[32m+[m[32m      <AutoGen>True</AutoGen>[m
+[32m+[m[32m      <DependentUpon>Resources.resx</DependentUpon>[m
+[32m+[m[32m    </Compile>[m
+[32m+[m[32m    <None Include="Properties\Settings.settings">[m
+[32m+[m[32m      <Generator>SettingsSingleFileGenerator</Generator>[m
+[32m+[m[32m      <LastGenOutput>Settings.Designer.cs</LastGenOutput>[m
+[32m+[m[32m    </None>[m
+[32m+[m[32m    <Compile Include="Properties\Settings.Designer.cs">[m
+[32m+[m[32m      <AutoGen>True</AutoGen>[m
+[32m+[m[32m      <DependentUpon>Settings.settings</DependentUpon>[m
+[32m+[m[32m      <DesignTimeSharedInput>True</DesignTimeSharedInput>[m
+[32m+[m[32m    </Compile>[m
+[32m+[m[32m  </ItemGroup>[m
+[32m+[m[32m  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />[m
+[32m+[m[32m  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.[m[41m [m
+[32m+[m[32m       Other similar extension points exist, see Microsoft.Common.targets.[m
+[32m+[m[32m  <Target Name="BeforeBuild">[m
+[32m+[m[32m  </Target>[m
+[32m+[m[32m  <Target Name="AfterBuild">[m
+[32m+[m[32m  </Target>[m
+[32m+[m[32m  -->[m
+[32m+[m[32m</Project>[m
+\ No newline at end of file[m
+[1mdiff --git a/NeuralWin/Neuron.cs b/NeuralWin/Neuron.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..65b9365[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Neuron.cs[m
+[36m@@ -0,0 +1,49 @@[m
+[32m+[m[32m﻿using System;[m
+[32m+[m[32musing System.Linq;[m
+[32m+[m
+[32m+[m[32mnamespace NeuralWin[m
+[32m+[m[32m{[m
+[32m+[m[32m    [Serializable][m
+[32m+[m[32m    public class Neuron[m
+[32m+[m[32m    {[m
+[32m+[m[32m        public double[] EntrancesWeight;[m
+[32m+[m[32m        public double[] EntranceValue;[m
+[32m+[m
+[32m+[m[32m        private double _sum;[m
+[32m+[m
+[32m+[m[32m        public int EntrancesNumber { get { return EntrancesWeight.Count(); } }[m
+[32m+[m
+[32m+[m[32m        public Neuron(int entrancesNumber, int shift)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            EntrancesWeight = new double[entrancesNumber];[m
+[32m+[m[32m            EntranceValue = new double[entrancesNumber];[m
+[32m+[m
+[32m+[m[32m            var r = new Random(shift);[m
+[32m+[m
+[32m+[m[32m            for (int i = 0; i < entrancesNumber; i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                var weight=0.0;[m
+[32m+[m[32m                while (weight < 0.01)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    weight = r.NextDouble() * 0.1;[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                if (r.Next(2) == 1) weight *= -1;[m
+[32m+[m[32m                EntrancesWeight[i] = weight;[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public double ActivateFunction()[m
+[32m+[m[32m        {[m
+[32m+[m[32m            return 1 / (1 + Math.Pow(Math.E, -2 * _sum));[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public void Entrance(double[] d)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            EntranceValue = d;[m
+[32m+[m[32m            _sum = 0;[m
+[32m+[m[32m            for (int i = 0; i < d.Count(); i++)[m
+[32m+[m[32m                _sum += EntrancesWeight[i] * d[i];[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/NeuralWin/Program.cs b/NeuralWin/Program.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c2792bf[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Program.cs[m
+[36m@@ -0,0 +1,19 @@[m
+[32m+[m[32m﻿using System;[m
+[32m+[m[32musing System.Windows.Forms;[m
+[32m+[m
+[32m+[m[32mnamespace NeuralWin[m
+[32m+[m[32m{[m
+[32m+[m[32m    static class Program[m
+[32m+[m[32m    {[m
+[32m+[m[32m        /// <summary>[m
+[32m+[m[32m        /// The main entry point for the application.[m
+[32m+[m[32m        /// </summary>[m
+[32m+[m[32m        [STAThread][m
+[32m+[m[32m        static void Main()[m
+[32m+[m[32m        {[m
+[32m+[m[32m            Application.EnableVisualStyles();[m
+[32m+[m[32m            Application.SetCompatibleTextRenderingDefault(false);[m
+[32m+[m[32m            Application.Run(new UIMainForm());[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/NeuralWin/Properties/AssemblyInfo.cs b/NeuralWin/Properties/AssemblyInfo.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ea1d7ad[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Properties/AssemblyInfo.cs[m
+[36m@@ -0,0 +1,36 @@[m
+[32m+[m[32m﻿using System.Reflection;[m
+[32m+[m[32musing System.Runtime.CompilerServices;[m
+[32m+[m[32musing System.Runtime.InteropServices;[m
+[32m+[m
+[32m+[m[32m// General Information about an assembly is controlled through the following[m[41m [m
+[32m+[m[32m// set of attributes. Change these attribute values to modify the information[m
+[32m+[m[32m// associated with an assembly.[m
+[32m+[m[32m[assembly: AssemblyTitle("NeuralWin")][m
+[32m+[m[32m[assembly: AssemblyDescription("")][m
+[32m+[m[32m[assembly: AssemblyConfiguration("")][m
+[32m+[m[32m[assembly: AssemblyCompany("")][m
+[32m+[m[32m[assembly: AssemblyProduct("NeuralWin")][m
+[32m+[m[32m[assembly: AssemblyCopyright("Copyright ©  2012")][m
+[32m+[m[32m[assembly: AssemblyTrademark("")][m
+[32m+[m[32m[assembly: AssemblyCulture("")][m
+[32m+[m
+[32m+[m[32m// Setting ComVisible to false makes the types in this assembly not visible[m[41m [m
+[32m+[m[32m// to COM components.  If you need to access a type in this assembly from[m[41m [m
+[32m+[m[32m// COM, set the ComVisible attribute to true on that type.[m
+[32m+[m[32m[assembly: ComVisible(false)][m
+[32m+[m
+[32m+[m[32m// The following GUID is for the ID of the typelib if this project is exposed to COM[m
+[32m+[m[32m[assembly: Guid("80c37d35-2411-47c0-9e71-ada0e1e7815b")][m
+[32m+[m
+[32m+[m[32m// Version information for an assembly consists of the following four values:[m
+[32m+[m[32m//[m
+[32m+[m[32m//      Major Version[m
+[32m+[m[32m//      Minor Version[m[41m [m
+[32m+[m[32m//      Build Number[m
+[32m+[m[32m//      Revision[m
+[32m+[m[32m//[m
+[32m+[m[32m// You can specify all the values or you can default the Build and Revision Numbers[m[41m [m
+[32m+[m[32m// by using the '*' as shown below:[m
+[32m+[m[32m// [assembly: AssemblyVersion("1.0.*")][m
+[32m+[m[32m[assembly: AssemblyVersion("1.0.0.0")][m
+[32m+[m[32m[assembly: AssemblyFileVersion("1.0.0.0")][m
+[1mdiff --git a/NeuralWin/Properties/Resources.Designer.cs b/NeuralWin/Properties/Resources.Designer.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d042be6[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Properties/Resources.Designer.cs[m
+[36m@@ -0,0 +1,71 @@[m
+[32m+[m[32m﻿//------------------------------------------------------------------------------[m
+[32m+[m[32m// <auto-generated>[m
+[32m+[m[32m//     This code was generated by a tool.[m
+[32m+[m[32m//     Runtime Version:4.0.30319.18010[m
+[32m+[m[32m//[m
+[32m+[m[32m//     Changes to this file may cause incorrect behavior and will be lost if[m
+[32m+[m[32m//     the code is regenerated.[m
+[32m+[m[32m// </auto-generated>[m
+[32m+[m[32m//------------------------------------------------------------------------------[m
+[32m+[m
+[32m+[m[32mnamespace NeuralWin.Properties[m
+[32m+[m[32m{[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    /// <summary>[m
+[32m+[m[32m    ///   A strongly-typed resource class, for looking up localized strings, etc.[m
+[32m+[m[32m    /// </summary>[m
+[32m+[m[32m    // This class was auto-generated by the StronglyTypedResourceBuilder[m
+[32m+[m[32m    // class via a tool like ResGen or Visual Studio.[m
+[32m+[m[32m    // To add or remove a member, edit your .ResX file then rerun ResGen[m
+[32m+[m[32m    // with the /str option, or rebuild your VS project.[m
+[32m+[m[32m    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")][m
+[32m+[m[32m    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()][m
+[32m+[m[32m    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()][m
+[32m+[m[32m    internal class Resources[m
+[32m+[m[32m    {[m
+[32m+[m
+[32m+[m[32m        private static global::System.Resources.ResourceManager resourceMan;[m
+[32m+[m
+[32m+[m[32m        private static global::System.Globalization.CultureInfo resourceCulture;[m
+[32m+[m
+[32m+[m[32m        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")][m
+[32m+[m[32m        internal Resources()[m
+[32m+[m[32m        {[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        /// <summary>[m
+[32m+[m[32m        ///   Returns the cached ResourceManager instance used by this class.[m
+[32m+[m[32m        /// </summary>[m
+[32m+[m[32m        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)][m
+[32m+[m[32m        internal static global::System.Resources.ResourceManager ResourceManager[m
+[32m+[m[32m        {[m
+[32m+[m[32m            get[m
+[32m+[m[32m            {[m
+[32m+[m[32m                if ((resourceMan == null))[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NeuralWin.Properties.Resources", typeof(Resources).Assembly);[m
+[32m+[m[32m                    resourceMan = temp;[m
+[32m+[m[32m                }[m
+[32m+[m[32m                return resourceMan;[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        /// <summary>[m
+[32m+[m[32m        ///   Overrides the current thread's CurrentUICulture property for all[m
+[32m+[m[32m        ///   resource lookups using this strongly typed resource class.[m
+[32m+[m[32m        /// </summary>[m
+[32m+[m[32m        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)][m
+[32m+[m[32m        internal static global::System.Globalization.CultureInfo Culture[m
+[32m+[m[32m        {[m
+[32m+[m[32m            get[m
+[32m+[m[32m            {[m
+[32m+[m[32m                return resourceCulture;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            set[m
+[32m+[m[32m            {[m
+[32m+[m[32m                resourceCulture = value;[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/NeuralWin/Properties/Resources.resx b/NeuralWin/Properties/Resources.resx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..af7dbeb[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Properties/Resources.resx[m
+[36m@@ -0,0 +1,117 @@[m
+[32m+[m[32m﻿<?xml version="1.0" encoding="utf-8"?>[m
+[32m+[m[32m<root>[m
+[32m+[m[32m  <!--[m[41m [m
+[32m+[m[32m    Microsoft ResX Schema[m[41m [m
+[32m+[m[41m    [m
+[32m+[m[32m    Version 2.0[m
+[32m+[m[41m    [m
+[32m+[m[32m    The primary goals of this format is to allow a simple XML format[m[41m [m
+[32m+[m[32m    that is mostly human readable. The generation and parsing of the[m[41m [m
+[32m+[m[32m    various data types are done through the TypeConverter classes[m[41m [m
+[32m+[m[32m    associated with the data types.[m
+[32m+[m[41m    [m
+[32m+[m[32m    Example:[m
+[32m+[m[41m    [m
+[32m+[m[32m    ... ado.net/XML headers & schema ...[m
+[32m+[m[32m    <resheader name="resmimetype">text/microsoft-resx</resheader>[m
+[32m+[m[32m    <resheader name="version">2.0</resheader>[m
+[32m+[m[32m    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>[m
+[32m+[m[32m    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>[m
+[32m+[m[32m    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>[m
+[32m+[m[32m    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>[m
+[32m+[m[32m    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">[m
+[32m+[m[32m        <value>[base64 mime encoded serialized .NET Framework object]</value>[m
+[32m+[m[32m    </data>[m
+[32m+[m[32m    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">[m
+[32m+[m[32m        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>[m
+[32m+[m[32m        <comment>This is a comment</comment>[m
+[32m+[m[32m    </data>[m
+[32m+[m[41m                [m
+[32m+[m[32m    There are any number of "resheader" rows that contain simple[m[41m [m
+[32m+[m[32m    name/value pairs.[m
+[32m+[m[41m    [m
+[32m+[m[32m    Each data row contains a name, and value. The row also contains a[m[41m [m
+[32m+[m[32m    type or mimetype. Type corresponds to a .NET class that support[m[41m [m
+[32m+[m[32m    text/value conversion through the TypeConverter architecture.[m[41m [m
+[32m+[m[32m    Classes that don't support this are serialized and stored with the[m[41m [m
+[32m+[m[32m    mimetype set.[m
+[32m+[m[41m    [m
+[32m+[m[32m    The mimetype is used for serialized objects, and tells the[m[41m [m
+[32m+[m[32m    ResXResourceReader how to depersist the object. This is currently not[m[41m [m
+[32m+[m[32m    extensible. For a given mimetype the value must be set accordingly:[m
+[32m+[m[41m    [m
+[32m+[m[32m    Note - application/x-microsoft.net.object.binary.base64 is the format[m[41m [m
+[32m+[m[32m    that the ResXResourceWriter will generate, however the reader can[m[41m [m
+[32m+[m[32m    read any of the formats listed below.[m
+[32m+[m[41m    [m
+[32m+[m[32m    mimetype: application/x-microsoft.net.object.binary.base64[m
+[32m+[m[32m    value   : The object must be serialized with[m[41m [m
+[32m+[m[32m            : System.Serialization.Formatters.Binary.BinaryFormatter[m
+[32m+[m[32m            : and then encoded with base64 encoding.[m
+[32m+[m[41m    [m
+[32m+[m[32m    mimetype: application/x-microsoft.net.object.soap.base64[m
+[32m+[m[32m    value   : The object must be serialized with[m[41m [m
+[32m+[m[32m            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter[m
+[32m+[m[32m            : and then encoded with base64 encoding.[m
+[32m+[m
+[32m+[m[32m    mimetype: application/x-microsoft.net.object.bytearray.base64[m
+[32m+[m[32m    value   : The object must be serialized into a byte array[m[41m [m
+[32m+[m[32m            : using a System.ComponentModel.TypeConverter[m
+[32m+[m[32m            : and then encoded with base64 encoding.[m
+[32m+[m[32m    -->[m
+[32m+[m[32m  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">[m
+[32m+[m[32m    <xsd:element name="root" msdata:IsDataSet="true">[m
+[32m+[m[32m      <xsd:complexType>[m
+[32m+[m[32m        <xsd:choice maxOccurs="unbounded">[m
+[32m+[m[32m          <xsd:element name="metadata">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:sequence>[m
+[32m+[m[32m                <xsd:element name="value" type="xsd:string" minOccurs="0" />[m
+[32m+[m[32m              </xsd:sequence>[m
+[32m+[m[32m              <xsd:attribute name="name" type="xsd:string" />[m
+[32m+[m[32m              <xsd:attribute name="type" type="xsd:string" />[m
+[32m+[m[32m              <xsd:attribute name="mimetype" type="xsd:string" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m          <xsd:element name="assembly">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:attribute name="alias" type="xsd:string" />[m
+[32m+[m[32m              <xsd:attribute name="name" type="xsd:string" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m          <xsd:element name="data">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:sequence>[m
+[32m+[m[32m                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />[m
+[32m+[m[32m                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />[m
+[32m+[m[32m              </xsd:sequence>[m
+[32m+[m[32m              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />[m
+[32m+[m[32m              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />[m
+[32m+[m[32m              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m          <xsd:element name="resheader">[m
+[32m+[m[32m            <xsd:complexType>[m
+[32m+[m[32m              <xsd:sequence>[m
+[32m+[m[32m                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />[m
+[32m+[m[32m              </xsd:sequence>[m
+[32m+[m[32m              <xsd:attribute name="name" type="xsd:string" use="required" />[m
+[32m+[m[32m            </xsd:complexType>[m
+[32m+[m[32m          </xsd:element>[m
+[32m+[m[32m        </xsd:choice>[m
+[32m+[m[32m      </xsd:complexType>[m
+[32m+[m[32m    </xsd:element>[m
+[32m+[m[32m  </xsd:schema>[m
+[32m+[m[32m  <resheader name="resmimetype">[m
+[32m+[m[32m    <value>text/microsoft-resx</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m  <resheader name="version">[m
+[32m+[m[32m    <value>2.0</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m  <resheader name="reader">[m
+[32m+[m[32m    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m  <resheader name="writer">[m
+[32m+[m[32m    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>[m
+[32m+[m[32m  </resheader>[m
+[32m+[m[32m</root>[m
+\ No newline at end of file[m
+[1mdiff --git a/NeuralWin/Properties/Settings.Designer.cs b/NeuralWin/Properties/Settings.Designer.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..96540ca[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Properties/Settings.Designer.cs[m
+[36m@@ -0,0 +1,30 @@[m
+[32m+[m[32m﻿//------------------------------------------------------------------------------[m
+[32m+[m[32m// <auto-generated>[m
+[32m+[m[32m//     This code was generated by a tool.[m
+[32m+[m[32m//     Runtime Version:4.0.30319.18010[m
+[32m+[m[32m//[m
+[32m+[m[32m//     Changes to this file may cause incorrect behavior and will be lost if[m
+[32m+[m[32m//     the code is regenerated.[m
+[32m+[m[32m// </auto-generated>[m
+[32m+[m[32m//------------------------------------------------------------------------------[m
+[32m+[m
+[32m+[m[32mnamespace NeuralWin.Properties[m
+[32m+[m[32m{[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()][m
+[32m+[m[32m    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")][m
+[32m+[m[32m    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase[m
+[32m+[m[32m    {[m
+[32m+[m
+[32m+[m[32m        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));[m
+[32m+[m
+[32m+[m[32m        public static Settings Default[m
+[32m+[m[32m        {[m
+[32m+[m[32m            get[m
+[32m+[m[32m            {[m
+[32m+[m[32m                return defaultInstance;[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/NeuralWin/Properties/Settings.settings b/NeuralWin/Properties/Settings.settings[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3964565[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/Properties/Settings.settings[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32m﻿<?xml version='1.0' encoding='utf-8'?>[m
+[32m+[m[32m<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">[m
+[32m+[m[32m  <Profiles>[m
+[32m+[m[32m    <Profile Name="(Default)" />[m
+[32m+[m[32m  </Profiles>[m
+[32m+[m[32m  <Settings />[m
+[32m+[m[32m</SettingsFile>[m
+[1mdiff --git a/NeuralWin/bin/Debug/NeuralWin.exe b/NeuralWin/bin/Debug/NeuralWin.exe[m
+[1mnew file mode 100644[m
+[1mindex 0000000..dad310a[m
+Binary files /dev/null and b/NeuralWin/bin/Debug/NeuralWin.exe differ
+[1mdiff --git a/NeuralWin/bin/Debug/NeuralWin.pdb b/NeuralWin/bin/Debug/NeuralWin.pdb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..60dfb8c[m
+Binary files /dev/null and b/NeuralWin/bin/Debug/NeuralWin.pdb differ
+[1mdiff --git a/NeuralWin/bin/Debug/NeuralWin.vshost.exe b/NeuralWin/bin/Debug/NeuralWin.vshost.exe[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3c5dcfb[m
+Binary files /dev/null and b/NeuralWin/bin/Debug/NeuralWin.vshost.exe differ
+[1mdiff --git a/NeuralWin/bin/Debug/NeuralWin.vshost.exe.manifest b/NeuralWin/bin/Debug/NeuralWin.vshost.exe.manifest[m
+[1mnew file mode 100644[m
+[1mindex 0000000..061c9ca[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/bin/Debug/NeuralWin.vshost.exe.manifest[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32m﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>[m
+[32m+[m[32m<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">[m
+[32m+[m[32m  <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>[m
+[32m+[m[32m  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">[m
+[32m+[m[32m    <security>[m
+[32m+[m[32m      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">[m
+[32m+[m[32m        <requestedExecutionLevel level="asInvoker" uiAccess="false"/>[m
+[32m+[m[32m      </requestedPrivileges>[m
+[32m+[m[32m    </security>[m
+[32m+[m[32m  </trustInfo>[m
+[32m+[m[32m</assembly>[m
+[1mdiff --git a/NeuralWin/bin/Debug/file.s b/NeuralWin/bin/Debug/file.s[m
+[1mnew file mode 100644[m
+[1mindex 0000000..701ed01[m
+Binary files /dev/null and b/NeuralWin/bin/Debug/file.s differ
+[1mdiff --git a/NeuralWin/bin/Debug/heart3.dt b/NeuralWin/bin/Debug/heart3.dt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f17393a[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/bin/Debug/heart3.dt[m
+[36m@@ -0,0 +1,920 @@[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.5 0 0.613462 0 0 0 0 1 0 0 0 0.426667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.2 1 0 0 1 0 0 0.483333 0 0.173077 0 0 0 0 1 0 0 0 0.753333 0 0 0 0 0.295455 0 1 0 0 0 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.32 0 0 0 1 0 0 0.233333 0 0.107692 0 0 0 0 1 0 0 0 0.766667 0 0 0 0 0.363636 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.6 0 0 0 0 1 0 0.166667 0 0.313462 0 0 0 0 0 0 1 0 0.413333 0 0 0 0 0.409091 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.5 0 0.280769 0 0 0 0 0 1 0 0 0.533333 0 0 1 0 0.863636 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.333333 0 0.355769 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0 1 0.240385 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.38 1 0 0 1 0 0 0.483333 0 0.330769 0 0 0 0 0 0 1 0 0.64 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.45 0 0.361538 0 0 0 0 1 0 0 0 0.28 0 0 1 0 0.75 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.32 1 0 0 0 1 0 0.266667 0 0.394231 0 0 0 0 0 0 1 0 0.62 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.583333 0 0.257692 0 0 0 0 0 1 0 0 0.386667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.35 0 0.265385 0 0 1 0 0 1 0 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.25 0 0.296154 0 0 0 0 0 0 1 0 0.546667 0 0 1 0 0.431818 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.3 0 0.194231 0 0 1 0 0 1 0 0 0.28 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.333333 0 0.35 0 0 0 0 1 0 0 0 0.26 0 0 1 0 0.5 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.5 0 0.253846 0 0 0 0 1 0 0 0 0.34 0 0 1 0 0.931818 0 0 0 1 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0 1 0.163462 0 0 0 0 0 1 0 0 0.4 0 0 1 0 0.636364 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.88 1 0 0 1 0 0 0.666667 0 0 1 0 0 1 0 0 1 0 0.36 0 0 0 0 0.477273 0 0 1 0 0 0.666667 0 0 0 0 1 1 0[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.333333 0 0.369231 0 0 0 0 1 0 0 0 0.433333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0 1 0.392308 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.76 1 0 1 0 0 0 0.666667 0 0.309615 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.295455 0 0 1 0 0 1 0 0 1 0 0 0 1[m
+[32m+[m[32m0.62 1 0 0 1 0 0 0.375 0 0 1 0 0 1 1 0 0 0 0.766667 0 0 0 0 0.590909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.24 1 0 1 0 0 0 0.5 0 0.392308 0 0 0 0 1 0 0 0 0.746667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.32 1 0 1 0 0 0 0.416667 0 0.25 0 0 0 0 1 0 0 0 0.5 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.6 1 0 1 0 0 0 0.333333 0 0.382692 0 0 0 0 0 0 1 0 0.666667 0 0 0 0 0.5 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.416667 0 0.232692 0 0 0 0 0 0 1 0 0.48 0 0 1 0 0.568182 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.416667 0 0.428846 0 0 0 0 1 0 0 0 0.52 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.42 1 0 1 0 0 0 0.166667 0 0.323077 0 0 0 0 1 0 0 0 0.76 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.65 0 0.163462 0 0 0 0 0 1 0 0 0.52 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.18 1 0 1 0 0 0 0.416667 0 0.380769 0 0 0 0 0 1 0 0 0.253333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0 1 0.378846 0 0 1 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 1 0 0 0.416667 0 0 1 0 0 0 0 1 0 0 0.34 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 0 0 0 0 1 0 0.5 0 0.351923 0 0 0 0 0 0 1 0 0.666667 0 0 0 0 0.704545 0 0 0 1 0 0.666667 0 1 0 0 0 0 1[m
+[32m+[m[32m0.02 1 0 1 0 0 0 0.5 0 0 1 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 0 0 1 0 0 0 0.416667 0 0.594231 0 0 0 0 0 0 1 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 0 0 1 0 0 0 0.416667 0 0.290385 0 0 0 0 0 0 1 0 0.76 0 0 0 0 0.295455 0 0 1 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.266667 0 0.317308 0 0 0 0 1 0 0 0 0.546667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.5 0 0 1 0 0 1 1 0 0 0 0.266667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.4 0 0 0 0 1 0 0.583333 0 0.273077 0 0 0 0 1 0 0 0 0.466667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.26 1 0 1 0 0 0 0.333333 0 0.138462 0 0 0 0 1 0 0 0 0.813333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.22 0 0 0 1 0 0 0.25 0 0.186538 0 0 0 0 0 1 0 0 0.8 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.42 1 0 0 1 0 0 0.333333 0 0.198077 0 0 0 0 1 0 0 0 0.526667 0 0 0 0 0.522727 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.54 1 0 0 1 0 0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.22 1 0 0 0 1 0 0.25 0 0.375 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.38 1 0 0 0 1 0 0.266667 0 0.228846 0 0 0 0 1 0 0 0 0.553333 0 0 0 0 0.306818 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 0 1 0 0 0 0 0.583333 0 0.298077 0 0 0 0 1 0 0 0 0.74 0 0 0 0 0.397727 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.375 0 0 1 0 0 0 1 0 0 0 0.3 0 0 1 0 0.295455 0 0 0 1 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.48 1 0 1 0 0 0 0.333333 0 0.382692 0 0 0 0 1 0 0 0 0.386667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 0 0 1 0 0 0 0.25 0 0.498077 0 0 0 0 0 1 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.82 0 1 0 0 0 0 0.5 0 0.296154 0 0 0 0 1 0 0 0 0.606667 0 0 0 0 0.5 0 1 0 0 0 0.666667 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 1 0 0 1 0 0 0 1 0.307692 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.666667 0 0.473077 0 0 0 0 1 0 0 0 0.226667 0 0 1 0 0.579545 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0 1 0.398077 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.416667 0 0.269231 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.46 0 0 0 1 0 0 0.5 0 0.428846 0 0 0 0 0 0 1 0 0.546667 0 0 0 0 0.465909 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0 0 0 1 0 0 1 1 0 0 0 0.54 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.583333 0 0.367308 0 0 0 0 0 0 1 0 0.346667 0 0 1 0 0.363636 0 0 1 0 0 0.333333 0 0 1 0 0 0 1[m
+[32m+[m[32m0.72 0 0 0 0 1 0 0.516667 0 0.367308 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.6 0 0 1 0 0 0 0.833333 0 0.592308 0 0 0 0 1 0 0 0 0.333333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.833333 0 0 1 0 0 1 1 0 0 0 0.6 0 0 0 0 0.465909 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.84 1 0 0 0 1 0 0.291667 0 0 1 0 0 0 0 1 0 0 0.213333 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.5 0 0.196154 0 0 0 0 0 0 1 0 0.56 0 0 1 0 0.75 0 1 0 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.52 1 0 0 1 0 0 0.583333 0 0.282692 0 0 0 0 0 0 1 0 0.7 0 0 0 0 0.477273 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.62 1 1 0 0 0 0 0.666667 0 0.361538 0 0 0 0 0 0 1 0 0.433333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.333333 0 0.173077 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.36 1 0 0 1 0 0 0.333333 0 0.278846 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 1 0 0 0.583333 0 0.244231 0 0 1 0 1 0 0 0 0.646667 0 0 0 0 0.477273 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.52 1 0 0 1 0 0 0.375 0 0.361538 0 0 0 0 0 0 1 0 0.613333 0 0 0 0 0.352273 0 0 0 1 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.78 1 1 0 0 0 0 0.516667 0 0.355769 0 0 1 0 1 0 0 0 0.433333 0 0 0 0 0.579545 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 1 0 0 0 0.5 0 0.451923 0 0 0 0 1 0 0 0 0.68 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.38 0 0 0 1 0 0 0.416667 0 0 1 0 0 0 1 0 0 0 0.566667 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.375 0 0.332692 0 0 0 0 0 0 1 0 0.54 0 0 1 0 0.613636 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.18 1 0 0 1 0 0 0.416667 0 0.209615 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.333333 0 0.259615 0 0 0 0 0 1 0 0 0.173333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.98 1 0 0 0 1 0 0.366667 0 0.165385 0 0 0 0 0 1 0 0 0.333333 0 0 1 0 0.522727 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.84 1 0 1 0 0 0 0.633333 0 0.307692 0 0 0 0 0 0 1 0 0.553333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.5 0 0.409615 0 0 0 0 1 0 0 0 0.413333 0 0 1 0 0.772727 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.6 1 0 1 0 0 0 0.375 0 0.259615 0 0 0 0 1 0 0 0 0.56 0 0 0 0 0.340909 0 0 1 0 0 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.541667 0 0.313462 0 0 0 0 1 0 0 0 0.24 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 0 1 0 0 0.64 0 0 1 0 0.295455 0 1 0 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.416667 0 0 1 0 0 0 0 1 0 0 0.266667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.5 1 0 0 1 0 0 0.541667 0 0.832692 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.5 0 0.248077 0 0 0 0 0 1 0 0 0.56 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.25 0 0 1 0 0 1 1 0 0 0 0.226667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.78 0 0 0 1 0 0 0.291667 0 0.921154 0 0 0 0 0 0 1 0 0.666667 0 0 0 0 0.477273 0 0 1 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.4 0 0.228846 0 0 1 0 1 0 0 0 0.64 0 0 1 0 0.409091 0 0 1 0 0 0 0 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 1 0 0 0 0 1 0.253846 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 0 0 1 0 0 0 0.333333 0 0.382692 0 0 0 0 1 0 0 0 0.4 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 0 0 0 1 0 0 0.333333 0 0.211538 0 0 0 0 1 0 0 0 0.433333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.25 0 0.296154 0 0 0 0 1 0 0 0 0.44 0 0 1 0 0.613636 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.125 0 0 1 0 0 1 1 0 0 0 0.44 0 0 0 0 0.545455 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0.25 0 0.236538 0 0 0 0 1 0 0 0 0.546667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.583333 0 0.144231 0 0 0 0 0 1 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.416667 0 0.186538 0 0 0 0 1 0 0 0 0.586667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.583333 0 0 1 0 0 0 1 0 0 0 0.3 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.2 0 0 0 0 1 0 0.208333 0 0 1 0 0 1 1 0 0 0 0.706667 0 0 0 0 0.613636 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 0 0 1 0 0 0 0.5 0 0 1 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.533333 0 0.221154 0 0 0 0 0 0 1 0 0.44 0 0 1 0 0.397727 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.76 1 0 0 1 0 0 0.25 0 0.246154 0 0 1 0 0 0 1 0 0.26 0 0 1 0 0.443182 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 1 0 1 0 0 0 0.416667 0 0.307692 0 0 0 0 0 0 1 0 0.8 0 0 0 0 0.318182 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.16 1 0 1 0 0 0 0.333333 0 0.155769 0 0 0 0 1 0 0 0 0.8 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.82 1 0 0 1 0 0 0.5 0 0.325 0 0 0 0 0 0 1 0 0.573333 0 0 0 0 0.522727 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.366667 0 0.348077 0 0 0 0 0 0 1 0 0.326667 0 0 1 0 0.545455 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.68 0 0 0 0 1 0 0.5 0 0.594231 0 0 0 0 0 0 1 0 0.646667 0 0 0 0 0.431818 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.28 0 0 0 1 0 0 0.333333 0 0.238462 0 0 0 0 1 0 0 0 0.753333 0 0 0 0 0.295455 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.25 0 0.392308 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.5 0 0.411538 0 0 0 0 1 0 0 0 0.753333 0 0 1 0 0.477273 0 1 0 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.36 0 0 0 0 1 0 0.483333 0 0.303846 0 0 0 0 0 0 1 0 0.613333 0 0 1 0 0.295455 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.35 0 0 1 0 0 0 1 0 0 0 0.4 0 0 0 0 0.352273 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 0 0 0 1 0 0 0.666667 0 0.528846 0 0 0 0 0 0 1 0 0.606667 0 0 0 0 0.386364 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.44 1 0 1 0 0 0 0.75 0 0.238462 0 0 0 0 0 1 0 0 0.373333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.416667 0 0 1 0 0 1 1 0 0 0 0.4 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.12 0 0 1 0 0 0 0.316667 0 0.240385 0 0 0 0 1 0 0 0 0.88 0 0 0 0 0.375 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.42 0 0 0 1 0 0 0.666667 0 0.182692 0 0 0 0 1 0 0 0 0.64 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.12 1 0 0 0 1 0 0.291667 0 0 1 0 0 1 0 0 0 1 0.626667 0 0 0 0 0.318182 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 1 0 0 0 0.25 0 0.248077 0 0 1 0 0 1 0 0 0.8 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.333333 0 0.336538 0 0 0 0 1 0 0 0 0.366667 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.32 1 0 1 0 0 0 0.333333 0 0.342308 0 0 0 0 1 0 0 0 0.753333 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.56 1 0 1 0 0 0 0.333333 0 0.298077 0 0 0 0 1 0 0 0 0.726667 0 0 0 0 0.295455 0 0 0 1 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.7 0 0 1 0 0 0 0.5 0 0.211538 0 0 0 0 1 0 0 0 0.793333 0 0 0 0 0.295455 0 1 0 0 0 0.666667 0 1 0 0 0 1 0[m
+[32m+[m[32m0.4 1 0 0 1 0 0 0.183333 0 0 1 0 0 1 0 1 0 0 0.333333 0 0 1 0 0.409091 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.34 1 0 0 1 0 0 0 1 0.290385 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.42 1 0 0 0 1 0 0.5 0 0.286538 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 1 0 0 0 0.333333 0 0 1 0 0 0 1 0 0 0 0.233333 0 0 0 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.72 0 0 0 0 1 0 0.125 0 0 1 0 0 1 1 0 0 0 0.566667 0 0 0 0 0.420455 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 0 1 0 0 0.383333 0 0.255769 0 0 1 0 1 0 0 0 0.493333 0 0 0 0 0.545455 0 0 1 0 0 0.333333 0 0 1 0 0 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.5 0 0.205769 0 0 0 0 1 0 0 0 0.586667 0 0 0 0 0.340909 0 0 1 0 0 0 0 0 1 0 0 1 0[m
+[32m+[m[32m0.46 0 0 0 0 1 0 0.416667 0 0.423077 0 0 0 0 1 0 0 0 0.546667 0 0 1 0 0.431818 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.84 1 0 0 0 1 0 0.416667 0 0.455769 0 0 0 0 0 0 1 0 0.326667 0 0 0 0 0.568182 0 0 1 0 0 1 0 1 0 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0 1 0.226923 0 0 1 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 1 0 0 0.583333 0 0.159615 0 0 0 0 1 0 0 0 0.76 0 0 0 0 0.477273 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.25 0 0.217308 0 0 0 0 1 0 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.416667 0 0 1 0 0 0 0 0 1 0 0.5 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.46 0 0 0 0 1 0 0.333333 0 0 1 0 0 1 1 0 0 0 0.446667 0 0 1 0 0.465909 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.84 1 0 0 1 0 0 0.666667 0 0.353846 0 0 0 0 1 0 0 0 0.346667 0 0 1 0 0.625 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.333333 0 0.280769 0 0 0 0 1 0 0 0 0.366667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.375 0 0.263462 0 0 0 0 1 0 0 0 0.5 0 0 1 0 0.579545 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.416667 0 0.301923 0 0 0 0 1 0 0 0 0.206667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.416667 0 0.434615 0 0 0 1 0 1 0 0 0.586667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.34 1 1 0 0 0 0 0.25 0 0.344231 0 0 0 0 1 0 0 0 0.48 0 0 0 0 0.431818 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.8 0 0 0 1 0 0 0.333333 0 0.242308 0 0 0 0 0 0 1 0 0.366667 0 0 0 0 0.465909 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.291667 0 0 1 0 0 1 0 1 0 0 0.146667 0 0 0 0 0.181818 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.76 0 0 0 1 0 0 0.55 0 0.371154 0 0 0 0 0 0 1 0 0.613333 0 0 0 0 0.295455 0 0 1 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.833333 0 0.375 0 0 0 0 0 1 0 0 0.4 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.583333 0 0.165385 0 0 0 0 1 0 0 0 0.453333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.416667 0 0.365385 0 0 0 0 0 1 0 0 0.366667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 1 0 0 0 0 0.316667 0 0.194231 0 0 0 0 0 0 1 0 0.866667 0 0 0 0 0.295455 0 0 1 0 0 0 0 0 1 0 0 1 0[m
+[32m+[m[32m0.28 1 0 0 1 0 0 0.45 0 0.298077 0 0 0 1 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.483333 0 0.357692 0 0 0 0 0 0 1 0 0.813333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.16 1 0 0 1 0 0 0.266667 0 0.490385 0 0 0 0 1 0 0 0 0.826667 0 0 0 0 0.409091 0 0 1 0 0 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.22 1 0 0 0 1 0 0.316667 0 0.257692 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.431818 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.44 1 0 1 0 0 0 0.5 0 0.251923 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.14 1 0 0 0 1 0 0.333333 0 0.217308 0 0 0 0 1 0 0 0 0.466667 0 0 1 0 0.477273 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.458333 0 0.407692 0 0 0 0 1 0 0 0 0.466667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.5 0 0 1 0 0 1 0 0 1 0 0.593333 0 0 0 0 0.522727 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 0 1 0 0 0.583333 0 0 1 0 0 0 1 0 0 0 0.413333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.22 0 0 0 1 0 0 0.483333 0 0.259615 0 0 0 0 1 0 0 0 0.613333 0 0 0 0 0.295455 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.34 0 0 0 0 1 0 0.433333 0 0.407692 0 0 0 0 1 0 0 0 0.56 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0.416667 0 0.367308 0 0 0 0 1 0 0 0 0.453333 0 0 1 0 0.409091 0 1 0 0 0 0 1 0 1 0 0 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.916667 0 0.388462 0 0 1 0 0 0 1 0 0.6 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.416667 0 0.265385 0 0 0 0 0 1 0 0 0.453333 0 0 0 0 0.352273 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.291667 0 0 1 0 0 0 1 0 0 0 0.22 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.64 1 0 0 1 0 0 0.333333 0 0.309615 0 0 0 0 0 0 1 0 0.5 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.333333 0 0.278846 0 0 1 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.9 0 0 0 1 0 0 0.666667 0 0 1 0 0 0 0 1 0 0 0.406667 0 0 0 0 0.295455 0 1 0 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.291667 0 0 1 0 0 1 1 0 0 0 0.633333 0 0 0 0 0.306818 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 1 0 0 0 0.5 0 0 1 0 0 1 0 1 0 0 0.6 0 0 0 0 0.318182 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.34 0 0 1 0 0 0 0.266667 0 0.144231 0 0 0 0 1 0 0 0 0.52 0 0 0 0 0.295455 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.42 1 0 0 1 0 0 0.316667 0 0.123077 0 0 0 0 0 0 1 0 0.44 0 0 0 0 0.386364 0 1 0 0 0 1 0 1 0 0 0 0 1[m
+[32m+[m[32m0.26 1 0 0 1 0 0 0.416667 0 0.248077 0 0 0 0 0 0 1 0 0.72 0 0 0 0 0.522727 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.4 0 0.334615 0 0 0 0 0 0 1 0 0.466667 0 0 1 0 0.636364 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.516667 0 0.251923 0 0 0 0 1 0 0 0 0.333333 0 0 1 0 0.579545 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.316667 0 0.194231 0 0 0 0 1 0 0 0 0.426667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.416667 0 0 1 0 0 1 0 1 0 0 0.686667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.5 0 0.363462 0 0 0 0 1 0 0 0 0.626667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.48 0 0 1 0 0 0 0.333333 0 0.240385 0 0 0 0 1 0 0 0 0.586667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.8 1 0 0 0 1 0 0.541667 0 0 1 0 0 1 1 0 0 0 0.506667 0 0 0 0 0.5 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.76 0 0 0 0 1 0 0.625 0 0 1 0 0 1 1 0 0 0 0.2 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.92 1 0 0 0 1 0 0.625 0 0.432692 0 0 0 0 1 0 0 0 0.346667 0 0 1 0 0.465909 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 0 0 0 1 0 0 0.5 0 0.390385 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.26 1 0 0 1 0 0 0.266667 0 0.317308 0 0 0 0 1 0 0 0 0.793333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0.458333 0 0 1 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.56 1 0 1 0 0 0 0.383333 0 0.155769 0 0 0 0 0 1 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 0 0 0 0 1 0 0.391667 0 0.476923 0 0 1 0 0 1 0 0 0.626667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.208333 0 0 1 0 0 1 1 0 0 0 0.333333 0 0 1 0 0.465909 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.76 0 0 0 0 1 0 0.816667 0 0.275 0 0 1 0 1 0 0 0 0.7 0 0 1 0 0.409091 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.48 1 0 1 0 0 0 0.333333 0 0.461538 0 0 0 0 1 0 0 0 0.746667 0 0 0 0 0.318182 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0.35 0 0.251923 0 0 1 0 0 0 1 0 0.16 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0.4 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.24 1 0 0 0 1 0 0.125 0 0 1 0 0 1 0 1 0 0 0.56 0 0 0 0 0.295455 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.28 1 0 0 0 1 0 0.541667 0 0 1 0 0 0 1 0 0 0 0.26 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.166667 0 0.411538 0 0 0 0 0 0 1 0 0.433333 0 0 1 0 0.397727 0 0 1 0 0 0.666667 0 1 0 0 0 0 1[m
+[32m+[m[32m0.54 0 0 1 0 0 0 0.35 0 0.451923 0 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 1 0 0 0.208333 0 0 1 0 0 1 1 0 0 0 0.586667 0 0 0 0 0.329545 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.416667 0 0.225 0 0 1 0 1 0 0 0 0.346667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.125 0 0 1 0 0 1 1 0 0 0 0.146667 0 0 1 0 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.533333 0 0.413462 0 0 1 0 0 1 0 0 0.453333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.433333 0 0.390385 0 0 1 0 0 0 1 0 0.66 0 0 1 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.96 1 0 0 1 0 0 0.2 0 0 1 0 0 0 0 0 1 0 0.4 0 0 0 0 0.693182 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.291667 0 0 1 0 0 0 1 0 0 0 0.353333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0.416667 0 0.328846 0 0 1 0 0 0 1 0 0.546667 0 0 1 0 0.363636 0 0 1 0 0 0.333333 0 0 1 0 0 0 1[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0.375 0 0 1 0 0 1 1 0 0 0 0.253333 0 0 0 0 0.0681818 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.75 0 0 1 0 0 0 1 0 0 0 0.44 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.5 0 0.234615 0 0 0 0 0 0 1 0 0.52 0 0 1 0 0.511364 0 1 0 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.166667 0 0 1 0 0 1 1 0 0 0 0.326667 0 0 0 0 0.193182 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 0 0 0 1 0 0 0.458333 0 0.321154 0 0 0 0 0 0 1 0 0.746667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.34 1 0 1 0 0 0 0.5 0 0.267308 0 0 1 0 1 0 0 0 0.413333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.666667 0 0.392308 0 0 0 0 0 0 1 0 0.566667 0 0 1 0 0.386364 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.56 0 0 0 0 1 0 0.45 0 0.623077 0 0 0 0 0 0 1 0 0.6 0 0 1 0 0.511364 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.56 0 0 1 0 0 0 0.333333 0 0.373077 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0 1 0.236538 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.24 1 0 0 1 0 0 0.5 0 0 1 0 0 0 1 0 0 0 0.853333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 1 0 0 0.416667 0 0.448077 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.409091 0 0 1 0 0 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.816667 0 0 1 0 1 0 0 0 1 0 0.4 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.38 1 0 0 1 0 0 0.233333 0 0.303846 0 0 0 0 1 0 0 0 0.613333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.45 0 0.432692 0 0 0 0 1 0 0 0 0.44 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.46 1 0 1 0 0 0 0.416667 0 0.267308 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.24 1 0 0 0 1 0 0.25 0 0.157692 0 0 0 0 0 0 1 0 0.36 0 0 1 0 0.522727 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.56 0 0 0 1 0 0 0.416667 0 0.257692 0 0 0 1 0 1 0 0 0.693333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.333333 0 0 1 0 0 1 1 0 0 0 0.4 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.533333 0 0.355769 0 0 1 0 0 1 0 0 0.666667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.18 0 0 0 1 0 0 0.416667 0 0.242308 0 0 0 0 1 0 0 0 0.546667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.38 1 0 1 0 0 0 0.666667 0 0.342308 0 0 0 0 1 0 0 0 0.76 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.38 0 0 0 0 1 0 0.333333 0 0.230769 0 0 0 0 1 0 0 0 0.253333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.333333 0 0.0288462 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.465909 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.333333 0 0.176923 0 0 0 0 0 0 1 0 0.4 0 0 1 0 0.579545 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.583333 0 0 1 0 0 1 0 1 0 0 0.12 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.25 0 0.321154 0 0 0 0 0 1 0 0 0.533333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.25 0 0.167308 0 0 0 0 0 0 1 0 0.653333 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0 1 0.359615 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.22 1 0 0 0 1 0 0.25 0 0.361538 0 0 0 0 1 0 0 0 0.48 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.84 1 0 0 0 1 0 0.75 0 0.205769 0 0 0 0 0 1 0 0 0.46 0 0 1 0 0.636364 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 0 0 0 0 1 0 0.333333 0 0.325 0 0 0 0 0 1 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.22 0 0 0 1 0 0 0.116667 0 0.219231 0 0 0 0 1 0 0 0 0.793333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.56 0 0 1 0 0 0 0.5 0 0.401923 0 0 0 0 0 0 1 0 0.62 0 0 0 0 0.443182 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.24 1 1 0 0 0 0 0.5 0 0.219231 0 0 0 0 1 0 0 0 0.786667 0 0 1 0 0.454545 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.02 1 0 1 0 0 0 0.333333 0 0.303846 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0 1 0.576923 0 0 1 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0 1 0.305769 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.666667 0 0.351923 0 0 0 0 1 0 0 0 0.286667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 0 0 1 0 0 0 0.458333 0 0.317308 0 0 0 0 0 0 1 0 0.673333 0 0 0 0 0.454545 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 1 0 1 0 0 0 0.416667 0 0.340385 0 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.35 0 0.263462 0 0 0 0 0 0 1 0 0.84 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.88 1 0 0 1 0 0 0.333333 0 0.248077 0 0 0 0 1 0 0 0 0.28 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.32 1 0 1 0 0 0 0.333333 0 0.190385 0 0 0 0 1 0 0 0 0.546667 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0.625 0 0 1 0 0 0 0 1 0 0 0.26 0 0 0 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.466667 0 0.313462 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.75 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 0 0 0 1 0 0 0.625 0 0.353846 0 0 0 0 1 0 0 0 0.586667 0 0 0 0 0.386364 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.38 1 0 0 1 0 0 0.25 0 0 1 0 0 1 1 0 0 0 0.4 0 0 1 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.34 1 0 0 0 1 0 0.516667 0 0.430769 0 0 0 0 0 0 1 0 0.58 0 0 1 0 0.295455 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.86 0 0 0 1 0 0 0.25 0 0.346154 0 0 1 0 0 0 1 0 0.466667 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.5 1 0 0 1 0 0 0.333333 0 0.211538 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0.66 0 0 1 0 0.465909 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 1 0 0 0.35 0 0 1 0 0 0 1 0 0 0 0.333333 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0 1 0 1 0 0 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.583333 0 0.265385 0 0 0 0 1 0 0 0 0.366667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0 1 0.436538 0 0 0 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 1 0 0 0 0.5 0 0.336538 0 0 1 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.5 0 0 1 0 0 1 1 0 0 0 0.406667 0 0 1 0 0.5 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 1 0 0 1 0 0 0.5 0 0.284615 0 0 0 0 1 0 0 0 0.686667 0 0 0 0 0.363636 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.46 1 0 0 1 0 0 0.375 0 0.307692 0 0 1 0 0 0 1 0 0.706667 0 0 0 0 0.568182 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 1 1 0 0 0 0 0.5 0 0.403846 0 0 0 0 0 0 0 1 0.506667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.333333 0 0.336538 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.704545 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.92 1 0 0 0 1 0 0.583333 0 0.332692 0 0 1 0 0 1 0 0 0.466667 0 0 1 0 0.75 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 1 0 0 0.5 0 0.334615 0 0 0 0 0 1 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 1 0 0 1 0 0 0.5 0 0.480769 0 0 0 0 1 0 0 0 0.653333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.25 0 0.294231 0 0 0 0 0 1 0 0 0.533333 0 0 1 0 0.409091 0 0 1 0 0 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.32 1 0 0 0 1 0 0.416667 0 0.238462 0 0 0 0 0 1 0 0 0.446667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.28 1 0 0 1 0 0 0.333333 0 0.298077 0 0 1 0 1 0 0 0 0.893333 0 0 0 0 0.386364 0 0 0 1 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.26 1 0 1 0 0 0 0.458333 0 0.226923 0 0 0 0 1 0 0 0 0.48 0 0 0 0 0.295455 0 0 1 0 0 0 0 0 1 0 0 1 0[m
+[32m+[m[32m0.02 1 0 1 0 0 0 0.416667 0 0.228846 0 0 0 0 0 0 1 0 0.946667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 0 1 0 0 0.213333 0 0 0 0 0.329545 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.26 0 0 1 0 0 0 0.416667 0 0.228846 0 0 0 0 0 0 1 0 0.746667 0 0 0 0 0.454545 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.42 0 0 1 0 0 0 0.25 0 0 1 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 1 0 0 0 0.616667 0 0.282692 0 0 0 0 0 0 1 0 0.693333 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.26 1 0 1 0 0 0 0.375 0 0.353846 0 0 0 0 1 0 0 0 0.56 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.78 0 0 0 1 0 0 0.6 0 0.369231 0 0 0 0 1 0 0 0 0.746667 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.583333 0 0.311538 0 0 0 0 1 0 0 0 0.74 0 0 0 0 0.465909 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.22 1 0 0 1 0 0 0.5 0 0.453846 0 0 0 0 0 0 1 0 0.813333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.583333 0 0.207692 0 0 0 0 0 1 0 0 0.5 0 0 1 0 0.352273 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 1 0 0 0 0.5 0 0.388462 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.48 1 0 0 1 0 0 0.4 0 0 1 0 0 0 0 1 0 0 0.8 0 0 0 0 0.636364 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.433333 0 0.515385 0 0 0 0 1 0 0 0 0.48 0 0 1 0 0.431818 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.64 0 0 0 1 0 0 0.333333 0 0.178846 0 0 1 0 1 0 0 0 0.24 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 1 0 1 0 0 0 0.5 0 0.213462 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.541667 0 0 1 0 0 1 0 1 0 0 0.0466667 0 0 0 0 0 1 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.28 1 0 0 1 0 0 0.666667 0 0.119231 0 0 0 0 1 0 0 0 0.573333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0 1 0.425 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.416667 0 0.380769 0 0 1 0 0 0 1 0 0.286667 0 0 1 0 0.477273 0 0 0 1 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.5 0 0.348077 0 0 0 0 1 0 0 0 0.493333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.32 1 0 1 0 0 0 0.583333 0 0.390385 0 0 0 0 1 0 0 0 0.6 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.32 1 0 0 0 1 0 0.416667 0 0.394231 0 0 0 0 1 0 0 0 0.266667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 1 0 0 0 0.383333 0 0 1 0 1 0 1 0 0 0 0.333333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.26 1 0 1 0 0 0 0.333333 0 0.403846 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.64 0 0 0 0 1 0 0.65 0 0.423077 0 0 0 0 0 0 1 0 0.673333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.08 0 0 1 0 0 0 0.208333 0 0.217308 0 0 0 0 1 0 0 0 0.7 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.333333 0 0.309615 0 0 0 0 0 0 1 0 0.24 0 0 1 0 0.545455 0 0 0 1 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.52 1 0 0 1 0 0 0 1 0.226923 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.375 0 0.267308 0 0 0 0 1 0 0 0 0.413333 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0 1 0.186538 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0 1 0 1 0 1 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.2 1 0 0 1 0 0 0.166667 0 0 1 0 0 1 1 0 0 0 0.793333 0 0 0 0 0.170455 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.333333 0 0 1 0 1 0 1 0 0 0 0.6 0 0 0 0 0.465909 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 1 0 0 0 1 0 1 0 0 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 0 0 0 0 1 0 0.666667 0 0 1 0 0 1 1 0 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.18 1 0 0 0 1 0 0.5 0 0.234615 0 0 0 0 1 0 0 0 0.466667 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.28 1 0 1 0 0 0 0.333333 0 0.217308 0 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.583333 0 0.278846 0 0 0 0 0 1 0 0 0.426667 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 0 0 0 0 1 0 0.416667 0 0.182692 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.2 1 0 0 0 1 0 0.25 0 0 1 0 0 0 1 0 0 0 0.6 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.2 1 0 0 0 1 0 0.25 0 0.392308 0 0 0 0 1 0 0 0 0.3 0 0 1 0 0.465909 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.08 1 0 1 0 0 0 0.375 0 0.325 0 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.583333 0 0 1 0 0 0 1 0 0 0 0.38 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.24 1 0 0 0 1 0 0.375 0 0 1 0 1 0 1 0 0 0 0.7 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.1 0 0 0 0 1 0 0.166667 0 0.309615 0 0 0 0 1 0 0 0 0.6 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.4 0 0.251923 0 0 0 0 0 0 1 0 0.473333 0 0 1 0 0.545455 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.55 0 0.3 0 0 0 0 1 0 0 0 0.586667 0 0 1 0 0.636364 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 0 0 0 0 1 0 0.833333 0 0.465385 0 0 0 0 0 1 0 0 0.38 0 0 1 0 0.681818 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.25 0 0.313462 0 0 0 0 0 0 1 0 0.653333 0 0 0 0 0.363636 0 1 0 0 0 0.666667 0 0 1 0 0 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.625 0 0 1 0 0 1 1 0 0 0 0.626667 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.76 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0.226667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 1 0 0 1 0 0 0.408333 0 0.213462 0 0 0 0 1 0 0 0 0.686667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.416667 0 0 1 0 0 0 0 0 1 0 0.366667 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.14 0 0 0 0 1 0 0.5 0 0.157692 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.3 0 1 0 0 0 0 0.166667 0 0.265385 0 0 0 0 1 0 0 0 0.546667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.28 1 0 1 0 0 0 0.583333 0 0.351923 0 0 0 0 1 0 0 0 0.506667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.2 1 0 0 0 1 0 0.333333 0 0.378846 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.416667 0 0 1 0 0 0 1 0 0 0 0.433333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.333333 0 0 1 0 1 0 0 1 0 0 0.306667 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.3 0 0 1 0 0 0 0.333333 0 0.25 0 0 0 0 0 1 0 0 0.766667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0.75 0 0 1 0 0 0 0 0 1 0 0.42 0 0 1 0 0.579545 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 1 0 0 0 0 0.333333 0 0.207692 0 0 0 0 0 0 1 0 0.68 0 0 0 0 0.511364 0 0 1 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.333333 0 0.315385 0 0 0 0 0 0 1 0 0.56 0 0 0 0 0.386364 0 1 0 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.666667 0 0.309615 0 0 0 0 0 1 0 0 0.146667 0 0 1 0 0.75 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 0 1 0 0 0.833333 0 0.246154 0 0 0 0 1 0 0 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.32 1 0 1 0 0 0 0.333333 0 0.259615 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.666667 0 0 1 0 1 0 0 1 0 0 0.413333 0 0 0 0 0 1 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.666667 0 0.325 0 0 1 0 0 1 0 0 0.32 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 1 0 0 0 0 0.6 0 0.409615 0 0 1 0 1 0 0 0 0.786667 0 0 0 0 0.431818 0 0 1 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.54 0 0 1 0 0 0 0.433333 0 0.494231 0 0 0 0 1 0 0 0 0.706667 0 0 0 0 0.431818 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.416667 0 0.996154 0 0 1 0 1 0 0 0 0.433333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 1 0 0 0 0 0.75 0 0.390385 0 0 0 0 0 0 1 0 0.66 0 0 0 0 0.318182 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.666667 0 0.207692 0 0 0 0 1 0 0 0 0.28 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 0 0 0 1 0 0 0.333333 0 0.257692 0 0 0 0 1 0 0 0 0.653333 0 0 0 0 0.477273 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.233333 0 0.284615 0 0 1 0 1 0 0 0 0.58 0 0 0 0 0.306818 0 1 0 0 0 1 0 0 0 1 0 1 0[m
+[32m+[m[32m0.62 1 1 0 0 0 0 0.816667 0 0.355769 0 0 0 0 0 0 1 0 0.566667 0 0 0 0 0.772727 0 0 0 1 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0 1 0 1 0 1 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.42 1 0 0 0 1 0 0.583333 0 0.263462 0 0 0 0 1 0 0 0 0.413333 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 0 1 0 0 0.333333 0 0.292308 0 0 0 0 1 0 0 0 0.6 0 0 1 0 0.465909 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.375 0 0 1 0 0 1 1 0 0 0 0.393333 0 0 1 0 0.397727 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.34 1 0 0 1 0 0 0.25 0 0 1 0 0 1 1 0 0 0 0.52 0 0 0 0 0.284091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.583333 0 0.538462 0 0 0 0 0 1 0 0 0.493333 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 1 0 0 1 0 0 0.333333 0 0.484615 0 0 0 0 1 0 0 0 0.253333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.6 0 0 1 0 0 0 0 1 0 0 0.386667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0.416667 0 0 1 0 1 0 0 1 0 0 0.46 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.483333 0 0.155769 0 0 0 0 0 0 1 0 0.433333 0 0 1 0 0.704545 0 0 1 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.416667 0 0.325 0 0 0 0 0 0 1 0 0.58 0 0 0 0 0.454545 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.583333 0 0.278846 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.42 1 1 0 0 0 0 0.416667 0 0 1 0 0 0 0 1 0 0 0.566667 0 0 0 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.16 1 0 0 1 0 0 0.416667 0 0.238462 0 0 0 0 1 0 0 0 0.786667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.42 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 1 0 0 0 0.833333 0 0.384615 0 0 1 0 0 1 0 0 0.4 0 0 0 0 0.386364 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.82 1 0 0 1 0 0 0.5 0 0 1 0 0 1 0 1 0 0 0.386667 0 0 0 0 0.579545 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.283333 0 0.448077 0 0 0 0 0 1 0 0 0.533333 0 0 0 0 0.795455 0 0 0 1 0 1 0 0 1 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.291667 0 0 1 0 0 1 1 0 0 0 0.52 0 0 0 0 0.352273 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.433333 0 0.190385 0 0 0 0 0 0 1 0 0.3 0 0 1 0 0.534091 0 0 1 0 0 0.333333 0 0 1 0 0 0 1[m
+[32m+[m[32m0.32 1 0 0 0 1 0 0.458333 0 0.780769 0 0 0 0 1 0 0 0 0.5 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.5 0 0.492308 0 0 0 0 0 1 0 0 0.433333 0 0 1 0 0.579545 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.875 0 0 1 0 0 0 1 0 0 0 0.253333 0 0 1 0 0.295455 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.3 0 0 0 1 0 0 0.583333 0 0 1 0 0 0 1 0 0 0 0.766667 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.541667 0 0.344231 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.583333 0 0 1 0 0 1 0 1 0 0 0.626667 0 0 0 0 0.715909 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.08 1 0 1 0 0 0 0.25 0 0.269231 0 0 0 0 1 0 0 0 0.826667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.6 1 0 1 0 0 0 0.466667 0 0.151923 0 0 0 0 0 1 0 0 0.26 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.266667 0 0.278846 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.48 1 0 1 0 0 0 0.666667 0 0.213462 0 0 0 0 1 0 0 0 0.7 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.86 1 0 0 0 1 0 0.416667 0 0.261538 0 0 0 0 0 1 0 0 0.366667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.14 1 0 1 0 0 0 0.333333 0 0.428846 0 0 0 0 0 0 1 0 0.8 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 1 0 0 0 0.486667 0 0 1 0 0.522727 0 1 0 0 0 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.76 0 1 0 0 0 0 0.583333 0 0.271154 0 0 0 0 1 0 0 0 0.36 0 0 0 0 0.590909 0 0 0 1 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.22 1 0 1 0 0 0 0.416667 0 0 1 0 0 0 1 0 0 0 0.4 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 1 1 0 0 0 0 0.75 0 0.273077 0 0 0 0 0 0 1 0 0.633333 0 0 0 0 0.363636 0 0 1 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.6 0 0.130769 0 0 0 0 0 1 0 0 0.246667 0 0 1 0 0.477273 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.291667 0 0.419231 0 0 0 0 1 0 0 0 0.806667 0 0 0 0 0.431818 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.583333 0 0.355769 0 0 0 0 0 0 1 0 0.34 0 0 1 0 0.386364 0 1 0 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.66 1 0 0 1 0 0 0.333333 0 0 1 0 0 0 1 0 0 0 0.133333 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0 1 0 1 0 0 0 0.416667 0 0.0903846 0 0 0 0 0 0 1 0 0.833333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.48 1 0 1 0 0 0 0.4 0 0.230769 0 0 1 0 1 0 0 0 0.826667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.375 0 0 1 0 1 0 1 0 0 0 0.286667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.46 1 0 0 1 0 0 0.25 0 0.173077 0 0 0 0 1 0 0 0 0.42 0 0 0 0 0.363636 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 1 0 1 0 0 0 0.541667 0 0.463462 0 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.36 1 0 0 1 0 0 0.583333 0 0.280769 0 0 0 0 1 0 0 0 0.58 0 0 0 0 0.704545 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.416667 0 0 1 0 0 1 1 0 0 0 0.333333 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.36 1 0 0 1 0 0 0.583333 0 0.15 0 0 0 1 1 0 0 0 0.373333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.666667 0 0.519231 0 0 0 0 1 0 0 0 0.26 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 0 1 0 0 0 0 0.416667 0 0.428846 0 0 0 0 1 0 0 0 0.253333 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.44 0 0 0 0 1 0 0.25 0 0.325 0 0 0 0 0 0 1 0 0.66 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.583333 0 0.288462 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.32 1 0 0 1 0 0 0.5 0 0.288462 0 0 0 0 0 0 1 0 0.8 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.44 0 0 1 0 0 0 0.333333 0 0.305769 0 0 0 0 1 0 0 0 0.68 0 0 0 0 0.420455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.375 0 0 1 0 0 1 1 0 0 0 0.4 0 0 0 0 0.465909 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 1 0 0 0.4 0 0.276923 0 0 0 0 0 0 1 0 0.6 0 0 0 0 0.340909 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.32 0 0 0 0 1 0 0.333333 0 0.255769 0 0 0 0 0 1 0 0 0.366667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 0 0 0 1 0 0 0.458333 0 0.421154 0 0 1 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.375 0 0.325 0 0 1 0 1 0 0 0 0.686667 0 0 0 0 0.318182 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.333333 0 0 1 0 1 0 1 0 0 0 0.293333 0 0 0 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.62 0 0 1 0 0 0 0.416667 0 0.198077 0 0 0 0 1 0 0 0 0.426667 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 1 0 0 1 0 0 0.166667 0 0.263462 0 0 0 0 1 0 0 0 0.553333 0 0 1 0 0.431818 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.5 0 0 1 0 0 0 0.275 0 0.736538 0 0 0 1 1 0 0 0 0.446667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.166667 0 0.246154 0 0 0 0 0 1 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.625 0 0.494231 0 0 1 0 1 0 0 0 0.6 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.516667 0 0.271154 0 0 0 0 0 0 1 0 0.34 0 0 1 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.358333 0 0.378846 0 0 0 0 1 0 0 0 0.233333 0 0 1 0 0.522727 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.46 0 0 1 0 0 0 0.666667 0 0.209615 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.333333 0 0.198077 0 0 0 0 1 0 0 0 0.353333 0 0 0 0 0.454545 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.4 1 0 1 0 0 0 0.25 0 0.276923 0 0 0 0 1 0 0 0 0.72 0 0 0 0 0.409091 0 0 0 1 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.5 0 0 0 0 1 0 0.483333 0 0.286538 0 0 0 0 0 0 1 0 0.666667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.46 1 0 0 1 0 0 0 1 0.488462 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 1 0 0 0 1 0.382692 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 1 0 0 0.583333 0 0.303846 0 0 1 0 1 0 0 0 0.513333 0 0 1 0 0.409091 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.12 0 0 1 0 0 0 0.416667 0 0.146154 0 0 0 0 1 0 0 0 0.866667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 0 0 0 1 0 0 0.416667 0 0.328846 0 0 0 0 0 0 1 0 0.593333 0 0 0 0 0.352273 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.666667 0 0 1 0 0 1 1 0 0 0 0.593333 0 0 0 0 0.340909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 1 0 0 0.766667 0 0.219231 0 0 1 0 1 0 0 0 0.68 0 0 0 0 0.352273 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.416667 0 0.323077 0 0 0 0 0 1 0 0 0.633333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.708333 0 0.392308 0 0 1 0 0 0 1 0 0.426667 0 0 0 0 0.409091 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.64 0 0 0 1 0 0 0.183333 0 0.448077 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.416667 0 0 1 0 0 1 1 0 0 0 0.733333 0 0 0 0 0.215909 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 0 0 0 1 0 0 0.4 0 0.251923 0 0 0 0 0 0 1 0 0.366667 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.25 0 0.480769 0 0 0 0 1 0 0 0 0.553333 0 0 1 0 0.636364 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0.386667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 0 0 0 0 1 0 0.783333 0 0.315385 0 0 0 0 1 0 0 0 0.553333 0 0 1 0 0.295455 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.46 0 0 0 0 1 0 0.666667 0 0.419231 0 0 0 0 1 0 0 0 0.6 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.416667 0 0 1 0 0 1 1 0 0 0 0.113333 0 0 0 0 0.579545 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 0 0 0 0 1 0 0.541667 0 0.426923 0 0 0 0 0 0 1 0 0.573333 0 0 1 0 0.409091 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.46 0 0 0 1 0 0 0.583333 0 0.221154 0 0 0 0 1 0 0 0 0.4 0 0 0 0 0.352273 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.34 1 0 0 0 1 0 0.2 0 0.236538 0 0 0 0 0 0 1 0 0.586667 0 0 1 0 0.636364 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.78 1 1 0 0 0 0 0.541667 0 0 1 0 0 0 0 0 1 0 0.433333 0 0 0 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.291667 0 0 1 0 0 1 1 0 0 0 0.453333 0 0 1 0 0.579545 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 1 0 0 0 0.5 0 0.261538 0 0 0 0 1 0 0 0 0.693333 0 0 1 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.433333 0 0.255769 0 0 0 0 0 1 0 0 0.533333 0 0 1 0 0.465909 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 0 0 0 0 1 0 0.333333 0 0.467308 0 0 0 0 1 0 0 0 0.333333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0 1 0 1 0 1 0 0 1 0 0 0.173333 0 0 0 0 0.465909 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.82 1 0 0 1 0 0 0 1 0.357692 0 0 0 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 0 0 0 0 1 0 0.366667 0 0.238462 0 0 0 0 1 0 0 0 0.686667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.14 1 0 0 0 1 0 0.383333 0 0.378846 0 0 0 0 0 0 1 0 0.64 0 0 1 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.35 0 0.284615 0 0 0 0 1 0 0 0 0.38 0 0 1 0 0.443182 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 1 0 0 0 0.333333 0 0.328846 0 0 1 0 1 0 0 0 0.513333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.24 1 0 0 1 0 0 0.416667 0 0.376923 0 0 0 0 1 0 0 0 0.713333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.666667 0 0.436538 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.35 0 0.344231 0 0 0 0 0 0 1 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.2 1 0 0 1 0 0 0.291667 0 0 1 0 0 0 1 0 0 0 0.453333 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.76 1 0 0 0 1 0 0.583333 0 0 1 0 0 0 1 0 0 0 0.32 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.2 1 1 0 0 0 0 0.333333 0 0.280769 0 0 0 0 1 0 0 0 0.813333 0 0 1 0 0.727273 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.5 0 0 0 1 0 0 0.333333 0 0.363462 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.78 0 0 0 0 1 0 0.216667 0 0.265385 0 0 0 0 1 0 0 0 0.546667 0 0 0 0 0.329545 0 1 0 0 0 0.666667 0 1 0 0 0 1 0[m
+[32m+[m[32m0.36 0 0 1 0 0 0 0.208333 0 0.228846 0 0 0 0 1 0 0 0 0.746667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.46 1 0 1 0 0 0 0.375 0 0.198077 0 0 0 0 1 0 0 0 0.566667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.84 1 0 0 0 1 0 0.541667 0 0.171154 0 0 0 0 1 0 0 0 0.433333 0 0 1 0 0.590909 0 0 0 1 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.34 0 0 1 0 0 0 0.833333 0 0 1 0 0 0 1 0 0 0 0.8 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 0 0 0 0 1 0 0.833333 0 0.503846 0 0 0 0 0 1 0 0 0.44 0 0 1 0 0.386364 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.333333 0 0.276923 0 0 0 0 0 0 1 0 0.46 0 0 1 0 0.590909 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.66 1 1 0 0 0 0 0.45 0 0.286538 0 0 0 0 1 0 0 0 0.566667 0 0 0 0 0.590909 0 0 1 0 0 0.666667 0 1 0 0 0 0 1[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0.233333 0 0.430769 0 0 0 0 1 0 0 0 0.64 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.6 0 0.363462 0 0 0 0 1 0 0 0 0.186667 0 0 1 0 0.431818 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.208333 0 0.298077 0 0 0 0 0 0 1 0 0.626667 0 0 1 0 0.363636 0 0 1 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.88 1 0 0 0 1 0 0 1 0.242308 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.38 1 0 0 0 1 0 0.666667 0 0 1 0 0 0 1 0 0 0 0.426667 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.68 1 0 0 1 0 0 0.666667 0 0 1 0 0 0 1 0 0 0 0.08 0 0 1 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 0 1 0 0 0.266667 0 0 1 0 0.181818 0 0 0 1 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.4 0 0 1 0 0 0 0.333333 0 0 1 0 1 0 0 1 0 0 0.586667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 0 0 0 0 1 0 0.583333 0 0.305769 0 0 0 0 1 0 0 0 0.626667 0 0 1 0 0.454545 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.62 1 1 0 0 0 0 0.45 0 0.228846 0 0 0 0 1 0 0 0 0.68 0 0 0 0 0.386364 0 1 0 0 0 0.666667 0 1 0 0 0 0 1[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.375 0 0 1 0 0 1 1 0 0 0 0.773333 0 0 0 0 0.477273 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 0 0 0 1 0 0 0.416667 0 0.342308 0 0 0 0 1 0 0 0 0.246667 0 0 0 0 0.431818 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.5 0 0 1 0 0 0 0 1 0 0 0.533333 0 0 1 0 0.352273 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.3 0 0 1 0 0 0 0.333333 0 0.223077 0 0 0 0 1 0 0 0 0.7 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0 1 0.369231 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.3 0 0 0 1 0 0 0.35 0 0.246154 0 0 0 0 1 0 0 0 0.7 0 0 0 0 0.318182 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.22 1 0 0 1 0 0 0.666667 0 0.119231 0 0 1 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.4 0 0 1 0 0 0 1 0 0 0 0.313333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.35 0 0.386538 0 0 0 0 0 0 1 0 0.373333 0 0 1 0 0.659091 0 0 1 0 0 0.666667 0 1 0 0 0 0 1[m
+[32m+[m[32m0.38 1 0 0 1 0 0 0.5 0 0.207692 0 0 0 0 1 0 0 0 0.566667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 0 1 0 0 0.416667 0 0.215385 0 0 1 0 0 0 1 0 0.613333 0 0 0 0 0.431818 0 0 0 1 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.42 1 0 0 1 0 0 0.5 0 0.196154 0 0 0 0 1 0 0 0 0.746667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.5 0 0.344231 0 0 1 0 0 0 1 0 0.393333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 1 0 0 0 1 0.275 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.433333 0 0.311538 0 0 1 0 0 0 1 0 0.553333 0 0 1 0 0.306818 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.48 0 0 0 1 0 0 0.466667 0 0.213462 0 0 0 0 0 0 1 0 0.726667 0 0 0 0 0.306818 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.666667 0 0.386538 0 0 0 0 0 0 1 0 0.32 0 0 1 0 0.465909 0 0 1 0 0 1 0 1 0 0 0 0 1[m
+[32m+[m[32m0.6 0 0 0 0 1 0 0.416667 0 0.215385 0 0 0 0 1 0 0 0 0.473333 0 0 0 0 0.363636 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.166667 0 0 1 0 0 1 1 0 0 0 0.413333 0 0 0 0 0.465909 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.533333 0 0 1 0 0 0 0 1 0 0 0.413333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.34 1 0 0 1 0 0 0.458333 0 0 1 0 0 0 1 0 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 0 0 0 0 1 0 1 0 0 1 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.409091 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0.666667 0 0.423077 0 0 0 0 1 0 0 0 0.766667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.28 1 0 0 0 1 0 0.5 0 0.525 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 1 0 0.217308 0 0 0 0 1 0 0 0 0.546667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 0 0 0 0 1 0 0.333333 0 0 1 0 0 1 0 1 0 0 0.42 0 0 1 0 0.488636 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.8 1 0 0 0 1 0 0.483333 0 0 1 0 0 0 1 0 0 0 0.466667 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.65 0 0.253846 0 0 0 0 1 0 0 0 0.333333 0 0 1 0 0.579545 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.458333 0 0 1 0 0 1 1 0 0 0 0.453333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.14 0 0 0 0 1 0 0.483333 0 0.188462 0 0 0 0 1 0 0 0 0.813333 0 0 0 0 0.454545 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.16 1 0 0 0 1 0 0.25 0 0 1 0 0 1 1 0 0 0 0.433333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.44 1 0 1 0 0 0 0.333333 0 0.159615 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 0 0 0 0 1 1 0[m
+[32m+[m[32m0.5 1 0 0 1 0 0 0.208333 0 0 1 0 0 0 1 0 0 0 0.366667 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.366667 0 0.303846 0 0 0 0 1 0 0 0 0.413333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.8 1 0 0 0 1 0 0.533333 0 0.207692 0 0 1 0 1 0 0 0 0.54 0 0 0 0 0.681818 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.24 1 0 0 0 1 0 0.333333 0 0.732692 0 0 0 1 1 0 0 0 0.613333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.68 1 1 0 0 0 0 0.266667 0 0.332692 0 0 0 0 0 1 0 0 0.6 0 0 1 0 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0 1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 0 0 0 0 1 0 0.366667 0 0.215385 0 0 0 0 1 0 0 0 0.506667 0 0 1 0 0.295455 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.74 1 1 0 0 0 0 0.483333 0 0.378846 0 0 1 0 0 0 1 0 0.76 0 0 0 0 0.454545 0 0 1 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.38 1 0 0 0 1 0 0.666667 0 0.396154 0 0 0 0 0 1 0 0 0.653333 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.25 0 0 1 0 0 1 1 0 0 0 0.32 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.458333 0 0.325 0 0 0 0 0 0 1 0 0.446667 0 0 0 0 0.613636 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.28 0 0 0 1 0 0 0.291667 0 0.242308 0 0 0 0 0 1 0 0 0.513333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.416667 0 0 1 0 0 1 0 1 0 0 0.466667 0 0 1 0 0.420455 0 0 0 1 0 0.333333 0 0 0 0 1 0 1[m
+[32m+[m[32m0.7 0 0 0 0 1 0 0.583333 0 0.619231 0 0 0 0 0 0 1 0 0.626667 0 0 0 0 0.75 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.18 1 0 0 0 1 0 0.416667 0 0.442308 0 0 0 0 1 0 0 0 0.653333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0 1 0 1 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.26 1 0 1 0 0 0 0.333333 0 0.396154 0 0 0 0 0 1 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.75 0 0.176923 0 0 0 0 1 0 0 0 0.16 0 0 1 0 0.579545 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.64 1 0 0 1 0 0 0 1 0.444231 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 1 0 0 0 0.366667 0 0 0 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.26 0 0 0 1 0 0 0.266667 0 0.351923 0 0 0 0 0 0 1 0 0.746667 0 0 1 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.5 0 0.430769 0 0 0 1 0 1 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.32 1 0 0 0 1 0 0.25 0 0.215385 0 0 0 0 0 0 1 0 0.78 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.22 1 0 1 0 0 0 0.916667 0 0.3 0 0 0 0 1 0 0 0 0.306667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.416667 0 0.409615 0 0 0 0 1 0 0 0 0.333333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 0 0 0 0 1 0 0.583333 0 0.269231 0 0 0 0 0 0 1 0 0.36 0 0 0 0 0.409091 0 0 1 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.24 1 0 0 1 0 0 0.416667 0 0.25 0 0 0 0 1 0 0 0 0.52 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.36 1 0 1 0 0 0 0.175 0 0.215385 0 0 1 0 1 0 0 0 0.64 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.25 0 0 1 0 0 1 1 0 0 0 0.353333 0 0 0 0 0.454545 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.12 1 0 1 0 0 0 0.583333 0 0.248077 0 0 0 0 0 1 0 0 0.72 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.28 1 0 0 0 1 0 0.5 0 0.271154 0 0 0 0 1 0 0 0 0.786667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.4 0 0 0 0 1 0 0.483333 0 0.248077 0 0 0 0 1 0 0 0 0.32 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.416667 0 0.0884615 0 0 0 0 1 0 0 0 0.366667 0 0 1 0 0.431818 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.76 1 0 0 0 1 0 0.266667 0 0.244231 0 0 0 0 0 0 1 0 0.48 0 0 1 0 0.306818 0 1 0 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.66 0 0 0 0 1 0 0.416667 0 0.401923 0 0 0 0 0 1 0 0 0.4 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0.333333 0 0 1 0 0 0 1 0 0 0 0.246667 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.65 0 0.240385 0 0 1 0 1 0 0 0 0.346667 0 0 1 0 0.636364 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 1 0 1 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.25 0 0 1 0 0 1 0 1 0 0 0.473333 0 0 1 0 0.454545 0 1 0 0 0 0.333333 0 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.666667 0 0.242308 0 0 1 0 0 1 0 0 0.213333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.22 1 0 1 0 0 0 0.333333 0 0.228846 0 0 0 0 1 0 0 0 0.566667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 0 1 0 0 0.333333 0 0.259615 0 0 0 0 0 0 1 0 0.173333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.5 0 0.0846154 0 0 0 0 1 0 0 0 0.5 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0 1 0.273077 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 1 1 0 0 0 0 0.516667 0 0.221154 0 0 1 0 0 1 0 0 0.266667 0 0 0 0 0.465909 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.666667 0 0 1 0 0 0 0 1 0 0 0.26 0 0 1 0 0.352273 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.26 0 0 1 0 0 0 0.25 0 0.317308 0 0 0 0 0 1 0 0 0.546667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.5 0 0.223077 0 0 0 0 1 0 0 0 0.466667 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.7 0 0.175 0 0 1 0 0 0 1 0 0.2 0 0 0 0 0.409091 0 0 1 0 0 0.666667 0 0 1 0 0 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.35 0 0.365385 0 0 1 0 0 1 0 0 0.6 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.28 0 0 0 0 1 0 0.183333 0 0.346154 0 0 0 0 0 0 1 0 0.413333 0 0 0 0 0.363636 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0.333333 0 0.294231 0 0 0 0 1 0 0 0 0.626667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.3 1 0 1 0 0 0 0.516667 0 0.234615 0 0 0 0 1 0 0 0 0.52 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 0 0 0 1 0 0 0.5 0 0.438462 0 0 0 0 1 0 0 0 0.486667 0 0 0 0 0.318182 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.166667 0 0.286538 0 0 0 0 1 0 0 0 0.64 0 0 0 0 0.306818 0 1 0 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.12 1 0 1 0 0 0 0.15 0 0.259615 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.433333 0 0.717308 0 0 1 0 1 0 0 0 0.06 0 0 0 0 0.409091 0 0 0 1 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.5 0 0.434615 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.5 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.68 1 1 0 0 0 0 0 1 0.103846 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.25 0 0.290385 0 0 0 0 1 0 0 0 0.433333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.26 1 0 1 0 0 0 0.25 0 0.288462 0 0 0 0 1 0 0 0 0.62 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.541667 0 0.378846 0 0 0 0 0 0 1 0 0.546667 0 0 1 0 0.613636 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.04 0 1 0 0 0 0 0.75 0 0.292308 0 0 0 0 0 1 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 1 0[m
+[32m+[m[32m0.42 1 0 0 0 1 0 0.333333 0 0.407692 0 0 0 1 1 0 0 0 0.48 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.7 1 0 0 1 0 0 0.416667 0 0 1 0 1 0 0 1 0 0 0.666667 0 0 0 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.333333 0 0.361538 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.3 0 0 1 0 0 0 0.333333 0 0.315385 0 0 0 0 0 1 0 0 0.773333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 1 0 0 0.333333 0 0.332692 0 0 0 0 0 0 1 0 0.58 0 0 0 0 0.340909 0 0 1 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.14 0 1 0 0 0 0 0.333333 0 0.144231 0 0 0 0 0 1 0 0 0.833333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.32 1 0 0 0 1 0 0.583333 0 0.628846 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.458333 0 0 1 0 0 0 1 0 0 0 0.366667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0.153333 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.666667 0 0 1 0 1 0 0 1 0 0 0.566667 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.92 0 0 1 0 0 0 0.333333 0 0.353846 0 0 0 0 0 0 1 0 0.406667 0 0 1 0 0.318182 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 1 0 0 1 0 0 0.5 0 0.192308 0 0 0 0 0 0 1 0 0.633333 0 0 0 0 0.636364 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.42 1 0 1 0 0 0 0.416667 0 0.348077 0 0 0 0 1 0 0 0 0.74 0 0 0 0 0.363636 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.333333 0 0.292308 0 0 0 0 1 0 0 0 0.0733333 0 0 0 0 0.409091 0 0 1 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.75 0 0 1 0 0 1 0 1 0 0 0.3 0 0 1 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.3 1 1 0 0 0 0 0.333333 0 0.396154 0 0 0 0 0 1 0 0 0.633333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.82 1 1 0 0 0 0 0.666667 0 0.286538 0 0 1 0 0 0 1 0 0.473333 0 0 0 0 0.306818 0 0 1 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.3 0 0 1 0 0 0 1 0 0 0 0.426667 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.38 1 0 0 1 0 0 0.625 0 0 1 0 0 0 1 0 0 0 0.386667 0 0 1 0 0.409091 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.7 1 1 0 0 0 0 0.541667 0 0.284615 0 0 1 0 0 0 1 0 0.6 0 0 0 0 0.556818 0 0 0 1 0 0 0 0 1 0 0 1 0[m
+[32m+[m[32m0.4 1 0 0 1 0 0 0.25 0 0.242308 0 0 0 0 1 0 0 0 0.52 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 1 0[m
+[32m+[m[32m0.34 1 0 0 0 1 0 0.416667 0 0.257692 0 0 0 0 0 1 0 0 0.466667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.5 0 0.336538 0 0 0 0 0 1 0 0 0.346667 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.333333 0 0.186538 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.416667 0 0.194231 0 0 1 0 0 1 0 0 0.533333 0 0 1 0 0.352273 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.8 1 0 0 1 0 0 0.833333 0 0.363462 0 0 1 0 0 0 1 0 0.6 0 0 1 0 0.477273 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.666667 0 0.328846 0 0 1 0 0 0 1 0 0.353333 0 0 1 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.28 1 0 1 0 0 0 0.333333 0 0.403846 0 0 0 0 1 0 0 0 0.68 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.22 1 0 1 0 0 0 0.333333 0 0 1 0 0 0 0 1 0 0 0.573333 0 0 0 0 0.522727 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.2 0 0 1 0 0 0 0 1 0 0 0.34 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0 1 0.228846 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.46 1 0 0 1 0 0 0.458333 0 0.144231 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.5 0 0.390385 0 0 0 0 1 0 0 0 0.5 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.5 0 0.351923 0 0 0 0 1 0 0 0 0.453333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.375 0 0.413462 0 0 0 0 0 0 1 0 0.74 0 0 0 0 0.295455 0 1 0 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.25 0 0.298077 0 0 0 0 0 1 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.68 0 0 0 0 1 0 0.666667 0 0.151923 0 0 0 0 0 0 1 0 0.566667 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.18 0 0 0 0 1 0 0.416667 0 0.169231 0 0 0 0 0 1 0 0 0.826667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.18 0 0 0 1 0 0 0.333333 0 0.25 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.5 0 0.338462 0 0 0 0 0 0 1 0 0.84 0 0 1 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.24 1 0 0 0 1 0 0.6 0 0.265385 0 0 0 0 1 0 0 0 0.806667 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.74 0 0 0 1 0 0 0.5 0 0.638462 0 0 1 0 0 0 1 0 0.646667 0 0 0 0 0.386364 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.96 0 0 0 1 0 0 0.5 0 0.215385 0 0 0 0 0 1 0 0 0.373333 0 0 0 0 0.420455 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.18 1 0 0 1 0 0 0.316667 0 0.298077 0 0 0 0 0 0 1 0 0.7 0 0 0 0 0.409091 0 0 1 0 0 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.42 1 0 0 0 1 0 0.416667 0 0.492308 0 0 0 0 1 0 0 0 0.4 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 1 0 0 0.333333 0 0.259615 0 0 0 0 0 0 1 0 0.493333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.633333 0 0.169231 0 0 0 0 0 0 1 0 0.393333 0 0 1 0 0.636364 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.92 1 1 0 0 0 0 0 1 0.251923 0 0 1 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.94 1 0 0 0 1 0 0.75 0 0.226923 0 0 1 0 0 1 0 0 0.32 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.52 0 0 0 1 0 0 0.666667 0 0.223077 0 0 0 0 1 0 0 0 0.686667 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.5 0 0.4 0 0 0 0 0 0 1 0 0.733333 0 0 0 0 0.431818 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.86 1 0 0 1 0 0 0 1 0.261538 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 0 0 0 0 1 0 0.416667 0 0.486538 0 0 1 0 0 1 0 0 0.466667 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.64 1 0 1 0 0 0 0.666667 0 0.35 0 0 1 0 0 1 0 0 0.646667 0 0 0 0 0.352273 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.5 0 0.180769 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.6 0 0 0 0 1 0 0.75 0 0.269231 0 0 1 0 0 0 1 0 0.573333 0 0 1 0 0.613636 0 0 1 0 0 0.666667 0 0 1 0 0 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.5 0 0.251923 0 0 0 0 1 0 0 0 0.3 0 0 0 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 0 0 1 0 0 0 0.25 0 0.225 0 0 0 0 1 0 0 0 0.566667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.2 0 0 0 0 1 0 0.25 0 0 1 0 0 0 1 0 0 0 0.64 0 0 0 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.2 1 0 0 1 0 0 0.541667 0 0.398077 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.64 1 0 0 1 0 0 0.833333 0 0 1 0 0 0 0 1 0 0 0.533333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.5 0 0.276923 0 0 0 0 1 0 0 0 0.333333 0 0 1 0 0.352273 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.5 1 0 0 1 0 0 0.625 0 0.173077 0 0 1 0 0 1 0 0 0.666667 0 0 0 0 0 1 0 0 0 1 0 1 0 1 0 0 1 0[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.133333 0 0.423077 0 0 0 0 0 1 0 0 0.406667 0 0 1 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.34 1 0 0 0 1 0 0.291667 0 0.336538 0 0 0 0 0 0 1 0 0.833333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 1 0 0 1 0 0 0.333333 0 0 1 0 0 1 1 0 0 0 0.54 0 0 1 0 0.522727 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.166667 0 0 1 0 0 1 0 1 0 0 0.486667 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0 1 0.255769 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.14 1 0 0 0 1 0 0 1 0 1 0 0 1 1 0 0 0 0.466667 0 0 1 0 0 1 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.333333 0 0.482692 0 0 0 0 1 0 0 0 0.386667 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.76 1 0 0 0 1 0 0.666667 0 0.275 0 0 0 0 0 0 1 0 0.52 0 0 0 0 0.556818 0 1 0 0 0 0 0 0 1 0 0 1 0[m
+[32m+[m[32m0.66 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 0.0666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.416667 0 0.226923 0 0 1 0 1 0 0 0 0.253333 0 0 0 0 0.465909 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0 1 0.376923 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.24 0 0 0 0 1 0 0.583333 0 0.590385 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.06 0 0 1 0 0 0 0.166667 0 0.257692 0 0 0 0 0 1 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.5 0 0.242308 0 0 1 0 0 0 1 0 0.7 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.541667 0 0 1 0 0 1 1 0 0 0 0.526667 0 0 1 0 0.375 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.516667 0 0.275 0 0 0 0 0 1 0 0 0.593333 0 0 1 0 0.579545 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.46 1 0 0 1 0 0 0.116667 0 0.273077 0 0 0 0 1 0 0 0 0.626667 0 0 1 0 0.295455 0 1 0 0 0 0.333333 0 0 0 1 0 1 0[m
+[32m+[m[32m0.82 1 0 0 0 1 0 0.5 0 0.236538 0 0 0 0 0 1 0 0 0.533333 0 0 1 0 0.522727 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 0 0 0 0 1 0 0.483333 0 0.401923 0 0 1 0 1 0 0 0 0.306667 0 0 0 0 0.511364 0 0 1 0 0 1 0 1 0 0 0 0 1[m
+[32m+[m[32m0.68 1 0 1 0 0 0 0.5 0 0.357692 0 0 0 0 1 0 0 0 0.613333 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 0 0 0 0 1 0 0.833333 0 0.461538 0 0 0 0 1 0 0 0 0.626667 0 0 1 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.5 0 0.425 0 0 1 0 1 0 0 0 0.18 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.06 1 0 0 0 1 0 0.333333 0 0.355769 0 0 0 0 1 0 0 0 0.62 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 0 1 0 0 0 0.333333 0 0.290385 0 0 0 0 1 0 0 0 0.786667 0 0 0 0 0.386364 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.766667 0 0.336538 0 0 0 0 1 0 0 0 0.0866667 0 0 0 0 0.522727 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.22 1 0 1 0 0 0 0.333333 0 0.221154 0 0 0 0 1 0 0 0 0.666667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 1 0 0 0 0 0.333333 0 0.165385 0 0 0 0 1 0 0 0 0.513333 0 0 0 0 0.522727 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.26 0 0 1 0 0 0 0.208333 0 0.217308 0 0 0 0 1 0 0 0 0.72 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.24 1 0 0 1 0 0 0.216667 0 0.298077 0 0 0 0 1 0 0 0 0.133333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.26 0 0 1 0 0 0 0.383333 0 0.425 0 0 0 0 1 0 0 0 0.686667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.54 0 0 0 0 1 0 0.4 0 0.230769 0 0 0 0 0 1 0 0 0.466667 0 0 1 0 0.522727 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 0 0 0 0 1 0 0.233333 0 0.15 0 0 0 0 1 0 0 0 0.766667 0 0 0 0 0.522727 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.366667 0 0 1 0 0 0 1 0 0 0 0.38 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.22 1 0 0 0 1 0 0.416667 0 0.426923 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.54 1 0 0 1 0 0 0.25 0 0.369231 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.416667 0 0.471154 0 0 1 0 0 0 1 0 0.48 0 0 1 0 0.5 0 1 0 0 0 1 0 0 0 1 0 0 1[m
+[32m+[m[32m0.42 0 0 1 0 0 0 0.366667 0 0.223077 0 0 0 0 1 0 0 0 0.693333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.2 1 0 0 0 1 0 0.583333 0 0 1 0 0 1 1 0 0 0 0.4 0 0 1 0 0 1 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.416667 0 0.328846 0 0 1 0 0 0 1 0 0.6 0 0 1 0 0.295455 0 1 0 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.666667 0 0.575 0 0 1 0 0 1 0 0 0.466667 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.291667 0 0 1 0 0 1 1 0 0 0 0.453333 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.4 0 0 1 0 0 0 0 1 0.428846 0 0 0 0 0 1 0 0 0 1 0 0 1 0.522727 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.86 0 0 1 0 0 0 0.666667 0 0.417308 0 0 0 0 1 0 0 0 0.68 0 0 0 0 0.340909 0 1 0 0 0 0.666667 0 1 0 0 0 1 0[m
+[32m+[m[32m0.28 1 0 1 0 0 0 0.333333 0 0.213462 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.42 1 0 0 0 1 0 0.4 0 0.244231 0 0 0 0 1 0 0 0 0.24 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 0 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.5 0 0 1 0 0 0 0 1 0 0 0.38 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.42 0 0 1 0 0 0 0.45 0 0.357692 0 0 0 0 1 0 0 0 0.68 0 0 0 0 0.295455 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.2 0 0 1 0 0 0 0.333333 0 0.365385 0 0 0 1 1 0 0 0 0.46 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.308333 0 0.278846 0 0 1 0 1 0 0 0 0.666667 0 0 1 0 0.454545 0 1 0 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.583333 0 0.25 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 1 0 1 0 0 0 0 1 0.380769 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 1 0 1 0 0 0 0.166667 0 0 1 0 0 0 1 0 0 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.583333 0 0 1 0 0 0 1 0 0 0 0.173333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.466667 0 0.259615 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.4 0 0.265385 0 0 0 0 0 1 0 0 0.393333 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 1 0 0 0.583333 0 0.0788462 0 0 1 0 1 0 0 0 0.753333 0 0 0 0 0.318182 0 1 0 0 0 0.333333 0 0 0 1 0 1 0[m
+[32m+[m[32m0.22 1 0 0 1 0 0 0.333333 0 0.488462 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.416667 0 0.167308 0 0 0 0 0 1 0 0 0.466667 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.416667 0 0.234615 0 0 0 0 0 1 0 0 0.24 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.34 1 0 1 0 0 0 0.4 0 0.428846 0 0 0 0 0 0 1 0 0.733333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.333333 0 0.309615 0 0 0 0 1 0 0 0 0.373333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.333333 0 0.176923 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.340909 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.48 0 0 0 1 0 0 0.375 0 0.359615 0 0 0 0 1 0 0 0 0.526667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 0 0 0 0 1 0 0.333333 0 0.517308 0 0 0 0 1 0 0 0 0.686667 0 0 1 0 0.363636 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.52 1 0 0 1 0 0 0.333333 0 0.253846 0 0 0 0 1 0 0 0 0.513333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.8 1 1 0 0 0 0 0 1 0.184615 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.72 1 1 0 0 0 0 0.25 0 0.242308 0 0 0 0 0 0 1 0 0.56 0 0 1 0 0.5 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.68 0 1 0 0 0 0 0.666667 0 0.207692 0 0 0 0 1 0 0 0 0.373333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.533333 0 0.507692 0 0 0 0 0 0 1 0 0.4 0 0 1 0 0.409091 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.36 1 1 0 0 0 0 0.5 0 0.359615 0 0 1 0 1 0 0 0 0.766667 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.28 1 1 0 0 0 0 0.566667 0 0.305769 0 0 0 0 0 0 1 0 0.786667 0 0 0 0 0.386364 0 1 0 0 0 0.666667 0 1 0 0 0 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.566667 0 0.226923 0 0 0 0 1 0 0 0 0.673333 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.28 1 0 0 1 0 0 0.416667 0 0.182692 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.75 0 0.582692 0 0 0 0 0 1 0 0 0.413333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.383333 0 0 1 0 0 0 0 1 0 0 0.4 0 0 0 0 0.465909 0 0 0 1 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0.933333 0 0.380769 0 0 0 0 0 0 1 0 0.9 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.291667 0 0 1 0 0 0 1 0 0 0 0.4 0 0 1 0 0.352273 0 0 1 0 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.416667 0 0.342308 0 0 0 0 1 0 0 0 0.533333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.541667 0 0.244231 0 0 0 0 0 0 1 0 0.48 0 0 0 0 0.522727 0 0 1 0 0 0.666667 0 0 1 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.416667 0 0.246154 0 0 0 0 0 1 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.333333 0 0 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.32 1 0 0 0 1 0 0.333333 0 0.161538 0 0 0 0 1 0 0 0 0.56 0 0 1 0 0.613636 0 0 0 1 0 0 0 0 1 0 0 0 1[m
+[32m+[m[32m0.66 0 0 1 0 0 0 0.5 0 0.409615 0 0 1 0 1 0 0 0 0.4 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.3 0 0 0 0 1 0 0.433333 0 0.492308 0 0 1 0 0 0 1 0 0.506667 0 0 1 0 0.636364 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.6 0 1 0 0 0 0 0.583333 0 0.380769 0 0 1 0 0 0 1 0 0.68 0 0 0 0 0.409091 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.42 0 0 1 0 0 0 0.25 0 0 1 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 1 0 0 1 0 0 0.433333 0 0.259615 0 0 1 0 0 1 0 0 0.68 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.2 1 0 1 0 0 0 0.5 0 0.407692 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.48 1 0 1 0 0 0 0.5 0 0.0288462 0 0 0 0 1 0 0 0 0.52 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.2 1 0 0 0 1 0 0.25 0 0.213462 0 0 0 0 1 0 0 0 0.706667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.266667 0 0.278846 0 0 0 0 0 0 1 0 0.7 0 0 0 0 0.579545 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.56 1 0 1 0 0 0 0.416667 0 0.261538 0 0 0 0 0 0 1 0 0.686667 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.54 1 0 0 0 1 0 0.333333 0 0.271154 0 0 0 0 0 0 1 0 0.446667 0 0 1 0 0.488636 0 0 0 1 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.5 1 0 1 0 0 0 0.416667 0 0 1 0 0 1 0 1 0 0 0.4 0 0 0 0 0.375 0 0 0 1 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.666667 0 0.35 0 0 1 0 0 1 0 0 0.186667 0 0 1 0 0.522727 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.25 0 0 1 0 0 1 1 0 0 0 0.213333 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.48 1 0 1 0 0 0 0.45 0 0.223077 0 0 0 0 1 0 0 0 0.653333 0 0 0 0 0.386364 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.52 0 0 0 1 0 0 0.25 0 0.248077 0 0 0 0 1 0 0 0 0.653333 0 0 0 0 0.477273 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.32 1 0 0 1 0 0 0.333333 0 0.271154 0 0 0 0 1 0 0 0 0.726667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.6 1 0 1 0 0 0 0.416667 0 0.319231 0 0 0 0 1 0 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.458333 0 0.286538 0 0 0 0 1 0 0 0 0.673333 0 0 0 0 0.352273 0 0 1 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0 1 0.211538 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.375 0 0.398077 0 0 0 0 0 1 0 0 0.366667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.92 1 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 0 0 0 0 1 0 0.283333 0 0.332692 0 0 1 0 0 0 1 0 0.24 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.666667 0 0.469231 0 0 0 0 1 0 0 0 0.213333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.375 0 0.251923 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.2 1 0 0 0 1 0 0.1 0 0.0615385 0 0 0 0 1 0 0 0 0.493333 0 0 1 0 0.579545 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.24 1 0 1 0 0 0 0.416667 0 0.365385 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.75 0 0.463462 0 0 0 0 0 0 1 0 0.533333 0 0 1 0 0.681818 0 0 0 1 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.28 1 0 0 1 0 0 0.333333 0 0.275 0 0 0 0 1 0 0 0 0.613333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.291667 0 0 1 0 0 1 1 0 0 0 0.08 0 0 1 0 0.238636 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.4 1 0 1 0 0 0 0.416667 0 0.307692 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.833333 0 0.384615 0 0 0 0 0 1 0 0 0.4 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.583333 0 0.303846 0 0 0 0 0 0 1 0 0.453333 0 0 0 0 0.590909 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.46 0 0 0 1 0 0 0.333333 0 0.403846 0 0 0 0 0 0 1 0 0.646667 0 0 0 0 0.363636 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.266667 0 0.494231 0 0 0 0 0 1 0 0 0.24 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.4 0 0 1 0 1 0 0 1 0 0 0.586667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 1 0 0 1 0 0 0.366667 0 0.326923 0 0 1 0 1 0 0 0 0.766667 0 0 0 0 0.295455 0 1 0 0 0 0.666667 0 1 0 0 0 1 0[m
+[32m+[m[32m0.32 1 0 1 0 0 0 0.416667 0 0.257692 0 0 0 0 0 0 1 0 0.853333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.12 1 1 0 0 0 0 0.316667 0 0.186538 0 0 0 0 0 0 1 0 0.76 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.48 1 0 0 1 0 0 0.483333 0 0.265385 0 0 0 0 1 0 0 0 0.726667 0 0 0 0 0.295455 0 1 0 0 0 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.84 1 0 0 0 1 0 0.5 0 0 1 0 1 0 1 0 0 0 0.646667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.56 1 0 0 1 0 0 0.416667 0 0 1 0 0 0 1 0 0 0 0.36 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.5 0 0.296154 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.431818 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.92 1 0 0 1 0 0 0.5 0 0.292308 0 0 1 0 1 0 0 0 0.226667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.25 0 0.225 0 0 0 0 1 0 0 0 0.6 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.75 0 0.342308 0 0 1 0 1 0 0 0 0.346667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 1 0 0 1 0 0 0.416667 0 0.280769 0 0 0 0 1 0 0 0 0.573333 0 0 0 0 0.5 0 0 1 0 0 1 0 0 0 1 0 1 0[m
+[32m+[m[32m0.64 1 0 0 1 0 0 0.291667 0 0 1 0 0 1 1 0 0 0 0.553333 0 0 0 0 0.568182 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.26 0 0 1 0 0 0 0.416667 0 0.307692 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.291667 0 0 1 0 0 0 1 0 0 0 0.566667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.26 1 0 0 0 1 0 0.333333 0 0.292308 0 0 0 1 1 0 0 0 0.52 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.42 1 0 0 1 0 0 0 1 0.109615 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 1 0 0 0 0.366667 0 0.338462 0 0 0 0 1 0 0 0 0.54 0 0 0 0 0.329545 0 1 0 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.68 1 0 0 0 1 0 0.25 0 0 1 0 0 0 1 0 0 0 0.4 0 0 1 0 0.352273 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.36 1 0 0 0 1 0 0.416667 0 0.263462 0 0 0 0 1 0 0 0 0.346667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 0 0 0 0 1 0 0.416667 0 0.344231 0 0 0 0 0 0 1 0 0.553333 0 0 0 0 0.340909 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.52 0 0 0 1 0 0 0.416667 0 0.401923 0 0 0 0 0 1 0 0 0.266667 0 0 1 0 0.295455 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.18 0 0 1 0 0 0 0.333333 0 0.336538 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.38 1 0 0 0 1 0 0.583333 0 0.271154 0 0 0 0 1 0 0 0 0.253333 0 0 1 0 0.465909 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.375 0 0 1 0 0 1 1 0 0 0 0.333333 0 0 0 0 0.306818 0 1 0 0 0 0.666667 0 0 0 0 1 0 1[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.4 0 0.342308 0 0 0 0 1 0 0 0 0.3 0 0 1 0 0.318182 0 0 1 0 0 0.333333 0 0 0 1 0 1 0[m
+[32m+[m[32m0.38 1 0 0 0 1 0 0.5 0 0.367308 0 0 1 0 1 0 0 0 0.433333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 1 0 0 0 0.333333 0 0.325 0 0 0 0 0 0 1 0 0.22 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.416667 0 0.180769 0 0 0 0 1 0 0 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.416667 0 0.332692 0 0 1 0 0 0 1 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.25 0 0.215385 0 0 0 0 0 0 1 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.375 0 0.315385 0 0 1 0 0 0 1 0 0.56 0 0 1 0 0.431818 0 0 1 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.94 1 0 0 0 1 0 0.666667 0 0.432692 0 0 1 0 1 0 0 0 0.346667 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 1 0 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.4 0 0.326923 0 0 0 0 1 0 0 0 0.673333 0 0 1 0 0.295455 0 1 0 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.54 1 0 0 1 0 0 0.333333 0 0 1 0 0 0 0 1 0 0 0.433333 0 0 1 0 0.579545 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.14 1 0 1 0 0 0 0.583333 0 0.344231 0 0 0 0 1 0 0 0 0.72 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.34 0 0 1 0 0 0 0.416667 0 0.292308 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.375 0 0.244231 0 0 0 0 1 0 0 0 0.72 0 0 0 0 0.409091 0 1 0 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.58 0 0 0 0 1 0 0.4 0 0.419231 0 0 0 0 0 0 1 0 0.66 0 0 0 0 0.295455 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.28 1 0 0 0 1 0 0.208333 0 0 1 0 0 1 1 0 0 0 0.453333 0 0 1 0 0.125 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.68 1 0 1 0 0 0 0.333333 0 0.376923 0 0 0 0 0 0 1 0 0.286667 0 0 0 0 0.454545 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.32 0 0 0 1 0 0 0.316667 0 0.301923 0 0 0 0 1 0 0 0 0.593333 0 0 0 0 0.329545 0 0 1 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.5 1 0 1 0 0 0 0.333333 0 0 1 0 0 0 1 0 0 0 0.48 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 1 1 0 0 0 0 0.375 0 0.246154 0 0 0 0 0 0 1 0 0.433333 0 0 1 0 0.454545 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.18 1 0 0 0 1 0 0.333333 0 0.265385 0 0 0 0 1 0 0 0 0.72 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.8 1 0 0 0 1 0 0.458333 0 0 1 0 0 0 0 1 0 0 0.4 0 0 1 0 0.295455 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.5 1 0 0 1 0 0 0.666667 0 0 1 0 0 1 0 0 1 0 0.413333 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.34 0 0 0 0 1 0 0.483333 0 0.290385 0 0 0 0 0 0 1 0 0.613333 0 0 1 0 0.318182 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.458333 0 0 1 0 0 0 1 0 0 0 0.02 0 0 1 0 0.352273 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.08 1 0 0 0 1 0 0.316667 0 0.853846 0 0 0 0 1 0 0 0 0.466667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 1 0 0 0 1 0 0.583333 0 0.290385 0 0 1 0 0 1 0 0 0.3 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.666667 0 0.278846 0 0 1 0 1 0 0 0 0.3 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.416667 0 0.323077 0 0 0 0 1 0 0 0 0.56 0 0 1 0 0.454545 0 1 0 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.8 1 0 0 1 0 0 0.583333 0 0.211538 0 0 1 0 1 0 0 0 0.48 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.54 1 0 1 0 0 0 0.666667 0 0.398077 0 0 1 0 1 0 0 0 0.553333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.383333 0 0 1 0 0 0 1 0 0 0 0.306667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 0 0 0 0 1 0 0.233333 0 0.353846 0 0 0 0 1 0 0 0 0.726667 0 0 1 0 0.5 0 0 1 0 0 0.666667 0 1 0 0 0 0 1[m
+[32m+[m[32m0.1 1 0 0 1 0 0 0.333333 0 0.409615 0 0 0 0 1 0 0 0 0.833333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.5 0 0.303846 0 0 0 0 1 0 0 0 0.633333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 0 1 0 0 0 1 0 1 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.55 0 0.255769 0 0 0 0 1 0 0 0 0.3 0 0 0 0 0.522727 0 0 1 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.72 1 0 0 0 1 0 0.25 0 0 1 0 0 1 1 0 0 0 0.36 0 0 1 0 0.443182 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.88 1 0 0 0 1 0 0.666667 0 0 1 0 1 0 0 0 1 0 0.466667 0 0 0 0 0.465909 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.36 0 0 0 1 0 0 0.516667 0 0.176923 0 0 0 0 0 0 1 0 0.666667 0 0 1 0 0.454545 0 0 0 1 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.56 1 0 1 0 0 0 0.366667 0 0.267308 0 0 1 0 1 0 0 0 0.673333 0 0 0 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 1 0 0 0 0.4 0 0.236538 0 0 1 0 0 0 1 0 0.533333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.38 1 0 0 1 0 0 0.416667 0 0.323077 0 0 0 0 1 0 0 0 0.793333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.58 0 0 0 0 1 0 0.5 0 0.3 0 0 0 0 1 0 0 0 0.42 0 0 1 0 0.318182 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.6 1 0 1 0 0 0 0.416667 0 0.278846 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.16 1 0 0 1 0 0 0.583333 0 0.144231 0 0 0 0 1 0 0 0 0.746667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.5 0 0 1 0 0 0 0.5 0 0.251923 0 0 0 0 1 0 0 0 0.546667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.36 1 0 1 0 0 0 0.5 0 0.365385 0 0 0 0 1 0 0 0 0.7 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.583333 0 0.311538 0 0 0 0 1 0 0 0 0.466667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 0 0 0 1 0 0 0.416667 0 0.365385 0 0 0 0 1 0 0 0 0.526667 0 0 0 0 0.318182 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.46 0 0 0 1 0 0 0.25 0 0.201923 0 0 0 0 1 0 0 0 0.4 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.76 1 0 0 0 1 0 0.333333 0 0.417308 0 0 0 0 0 0 1 0 0.606667 0 0 0 0 0.340909 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.5 0 0.176923 0 0 0 0 1 0 0 0 0.68 0 0 1 0 0.295455 0 1 0 0 0 0.333333 0 0 0 1 0 0 1[m
+[32m+[m[32m0.3 0 0 1 0 0 0 0.333333 0 0.348077 0 0 0 0 1 0 0 0 0.386667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.8 1 0 0 1 0 0 0.316667 0 0.369231 0 0 0 0 1 0 0 0 0.606667 0 0 0 0 0.409091 0 1 0 0 0 0.333333 0 0 0 1 0 1 0[m
+[32m+[m[32m0.72 0 0 0 0 1 0 0.416667 0 0.419231 0 0 0 0 1 0 0 0 0.413333 0 0 0 0 0.522727 0 0 1 0 0 0.666667 0 1 0 0 0 1 0[m
+[32m+[m[32m0.4 1 0 1 0 0 0 0.5 0 0.294231 0 0 0 0 1 0 0 0 0.386667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.32 1 0 0 1 0 0 0.416667 0 0.284615 0 0 0 0 1 0 0 0 0.793333 0 0 1 0 0.340909 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.48 1 0 0 0 1 0 0.708333 0 0 1 0 0 1 1 0 0 0 0.413333 0 0 1 0 0.409091 0 1 0 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.76 1 0 0 0 1 0 0.266667 0 0.338462 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.465909 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0.666667 0 0.211538 0 0 0 0 0 1 0 0 0.466667 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 1 0 1 0 0 0 0.416667 0 0.190385 0 0 0 0 1 0 0 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.14 1 0 0 1 0 0 0 1 0.146154 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.36 0 0 0 0 1 0 0.416667 0 0.294231 0 0 0 0 1 0 0 0 0.2 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.25 0 0.223077 0 0 0 0 1 0 0 0 0.44 0 0 1 0 0.465909 0 0 1 0 0 0 0 0 1 0 0 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.366667 0 0.336538 0 0 0 0 0 1 0 0 0.346667 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.38 0 0 1 0 0 0 0.5 0 0.330769 0 0 0 0 1 0 0 0 0.5 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 1 0 0 0 0.5 0 0.346154 0 0 0 0 0 1 0 0 0.566667 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.12 1 1 0 0 0 0 0.5 0 0.136538 0 0 0 0 1 0 0 0 0.8 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.08 1 1 0 0 0 0 0.125 0 0 1 0 0 1 1 0 0 0 0.446667 0 0 0 0 0.375 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.34 1 0 0 0 1 0 0.5 0 0.267308 0 0 0 0 1 0 0 0 0.56 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 1 0 0 0 0 0.333333 0 0 1 0 0 1 0 0 1 0 0.493333 0 0 0 0 0.204545 0 0 1 0 0 0.666667 0 0 0 0 1 0 1[m
+[32m+[m[32m0.14 1 0 1 0 0 0 0.25 0 0.330769 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.433333 0 0.234615 0 0 0 0 1 0 0 0 0.72 0 0 1 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.66 1 0 0 0 1 0 0.333333 0 0.378846 0 0 0 0 0 1 0 0 0.5 0 0 1 0 0.75 0 0 0 1 0 0 1 0 1 0 0 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0 1 0.282692 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.18 1 0 0 1 0 0 0.416667 0 0.317308 0 0 0 0 1 0 0 0 0.846667 0 0 0 0 0.693182 0 0 0 1 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.3 1 0 0 1 0 0 0.416667 0 0.442308 0 0 0 0 1 0 0 0 0.68 0 0 0 0 0.511364 0 1 0 0 0 0.333333 0 1 0 0 0 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0.5 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0.295455 0 0 1 0 0 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.62 1 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0.453333 0 0 1 0 0.522727 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.583333 0 0.257692 0 0 0 0 0 1 0 0 0.386667 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.86 0 0 0 0 1 0 0.266667 0 0.123077 0 0 0 0 1 0 0 0 0.433333 0 0 0 0 0.477273 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.6 0 0 0 1 0 0 0.333333 0 0.490385 0 0 0 0 1 0 0 0 0.746667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.98 1 0 0 0 1 0 0.375 0 0.421154 0 0 0 0 0 0 1 0 0.68 0 0 1 0 0.295455 0 1 0 0 0 1 0 1 0 0 0 0 1[m
+[32m+[m[32m0.34 1 0 0 0 1 0 0.333333 0 0.269231 0 0 0 0 1 0 0 0 0.533333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.66 0 0 0 0 1 0 0.416667 0 0.471154 0 0 0 0 0 0 1 0 0.726667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 0 1[m
+[32m+[m[32m0.68 0 1 0 0 0 0 0.5 0 0 1 0 0 1 1 0 0 0 0.553333 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.38 1 1 0 0 0 0 0.25 0 0.315385 0 0 0 0 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.44 1 0 0 0 1 0 0.416667 0 0.284615 0 0 0 0 1 0 0 0 0.406667 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 0 1 0 0 0.586667 0 0 0 0 0.295455 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 0 0 0 0 1 0 0.483333 0 0.363462 0 0 0 0 1 0 0 0 0.3 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.7 1 0 1 0 0 0 0 1 0.153846 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.166667 0 0.313462 0 0 0 0 1 0 0 0 0.433333 0 0 0 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.56 1 0 0 0 1 0 0.583333 0 0.246154 0 0 1 0 1 0 0 0 0.433333 0 0 1 0 0.409091 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.52 0 0 1 0 0 0 0.333333 0 0.261538 0 0 0 0 1 0 0 0 0.52 0 0 0 0 0.409091 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.76 1 0 0 1 0 0 0.333333 0 0 1 0 0 0 0 1 0 0 0.4 0 0 0 0 0.238636 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.16 1 0 1 0 0 0 0.333333 0 0.35 0 0 0 0 1 0 0 0 0.666667 0 0 0 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.616667 0 0 1 0 0 1 0 1 0 0 0.533333 0 0 1 0 0.465909 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.26 0 0 1 0 0 0 0.375 0 0.190385 0 0 0 0 1 0 0 0 0.8 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 0 0 0 1 0 0 0.416667 0 0.259615 0 0 0 0 1 0 0 0 0.666667 0 0 1 0 0.522727 0 1 0 0 0 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.52 1 0 1 0 0 0 0.333333 0 0.309615 0 0 0 0 1 0 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.125 0 0 1 0 0 1 1 0 0 0 0.813333 0 0 0 0 0.375 0 0 0 1 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.3 0 0 1 0 0 0 0.583333 0 0.194231 0 0 0 0 1 0 0 0 0.626667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.46 1 0 0 0 1 0 0 1 0.255769 0 0 1 0 0 0 1 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.2 1 0 0 0 1 0 0.458333 0 0 1 0 0 1 1 0 0 0 0.6 0 0 0 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.216667 0 0.342308 0 0 1 0 1 0 0 0 0.333333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0.5 0 0.257692 0 0 0 0 0 1 0 0 0.413333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.52 0 0 0 1 0 0 0.233333 0 0.35 0 0 0 0 0 0 1 0 0.713333 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.5 1 0 0 0 1 0 0.5 0 0.226923 0 0 1 0 0 0 1 0 0.633333 0 0 1 0 0.647727 0 0 0 1 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.5 1 0 0 1 0 0 0.416667 0 0.309615 0 0 1 0 0 0 1 0 0.753333 0 0 0 0 0.295455 0 1 0 0 0 1 0 1 0 0 0 1 0[m
+[32m+[m[32m0.62 1 0 0 0 1 0 0.616667 0 0 1 0 0 0 0 1 0 0 0.473333 0 0 1 0 0.465909 0 0 0 0 1 0 0 0 0 0 1 1 0[m
+[32m+[m[32m0.7 1 0 0 0 1 0 0.466667 0 0 1 0 0 0 1 0 0 0 0.16 0 0 1 0 0.295455 0 0 0 0 1 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.458333 0 0.263462 0 0 0 0 1 0 0 0 0.266667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.56 0 0 0 0 1 0 1 0 0.390385 0 0 1 0 0 0 1 0 0.486667 0 0 1 0 0.75 0 0 0 1 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.14 1 0 1 0 0 0 0.35 0 0.205769 0 0 0 0 1 0 0 0 0.76 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.72 1 0 0 1 0 0 0.375 0 0.430769 0 0 0 0 1 0 0 0 0.473333 0 0 1 0 0.5 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.64 0 0 0 0 1 0 0.583333 0 0.332692 0 0 0 0 0 0 1 0 0.646667 0 0 0 0 0.590909 0 0 1 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.38 0 0 0 1 0 0 0.458333 0 0.313462 0 0 1 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.42 0 0 0 0 1 0 0.416667 0 0.353846 0 0 0 0 1 0 0 0 0.686667 0 0 0 0 0.295455 0 1 0 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.28 1 0 0 0 1 0 0.466667 0 0.442308 0 0 0 0 1 0 0 0 0.433333 0 0 1 0 0.5 0 0 1 0 0 0 0 0 1 0 0 0 1[m
+[32m+[m[32m0.7 0 0 1 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.666667 0 0 1 0 0 1 1 0 0 0 0.253333 0 0 1 0 0.522727 0 0 1 0 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.94 1 0 0 0 1 0 0.466667 0 0.269231 0 0 0 0 1 0 0 0 0.346667 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.64 1 0 0 0 1 0 0.416667 0 0.194231 0 0 1 0 0 0 1 0 0.533333 0 0 1 0 0.352273 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.42 0 0 0 1 0 0 0.416667 0 0.234615 0 0 0 0 0 1 0 0 0.5 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.92 1 0 1 0 0 0 0.541667 0 0 1 0 0 1 0 1 0 0 0.42 0 0 0 0 0.443182 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.4 1 0 0 0 1 0 0.366667 0 0.363462 0 0 0 0 0 0 1 0 0.706667 0 0 0 0 0.352273 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.78 1 0 0 0 1 0 0 1 0.546154 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 1 0 0 0.433333 0 0.267308 0 0 0 0 0 0 1 0 0.753333 0 0 0 0 0.659091 0 1 0 0 0 0.666667 0 0 0 1 0 0 1[m
+[32m+[m[32m0.6 0 0 1 0 0 0 0.466667 0 0.45 0 0 1 0 0 0 1 0 0.613333 0 0 0 0 0.295455 0 1 0 0 0 0.666667 0 1 0 0 0 0 1[m
+[32m+[m[32m0.52 1 0 0 0 1 0 0.25 0 0.232692 0 0 0 0 0 0 1 0 0.32 0 0 1 0 0.295455 0 0 1 0 0 0.333333 0 1 0 0 0 0 1[m
+[32m+[m[32m0.34 0 0 1 0 0 0 0.416667 0 0.286538 0 0 0 0 0 0 1 0 0.766667 0 0 0 0 0.363636 0 0 1 0 0 0 0 1 0 0 0 1 0[m
+[32m+[m[32m0.42 1 0 0 1 0 0 0.291667 0 0.346154 0 0 0 0 1 0 0 0 0.766667 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.42 1 0 0 0 1 0 0.416667 0 0.232692 0 0 0 0 1 0 0 0 0.733333 0 0 0 0 0.295455 0 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.74 1 1 0 0 0 0 0 1 0.321154 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 1 0[m
+[32m+[m[32m0.68 1 0 0 1 0 0 0 1 0.228846 0 0 0 0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.3 1 0 0 0 1 0 0.25 0 0.242308 0 0 0 0 1 0 0 0 0.673333 0 0 0 0 0.295455 0 1 0 0 0 0 0 0 0 1 0 1 0[m
+[32m+[m[32m0.78 1 0 0 1 0 0 0.6 0 0.244231 0 0 0 0 0 0 1 0 0.6 0 0 0 0 0.386364 0 0 1 0 0 0 0 0 0 1 0 0 1[m
+[32m+[m[32m0.58 1 0 0 0 1 0 0.583333 0 0.326923 0 0 0 0 1 0 0 0 0.213333 0 0 1 0 0.636364 0 0 1 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.38 1 0 0 0 1 0 0.25 0 0 1 0 0 1 0 1 0 0 0.593333 0 0 0 0 0.534091 0 1 0 0 0 0 1 0 0 0 1 0 1[m
+[32m+[m[32m0.6 1 0 0 0 1 0 0.333333 0 0 1 0 0 0 0 0 1 0 0.306667 0 0 1 0 0.465909 0 0 0 1 0 0 1 0 0 1 0 0 1[m
+[32m+[m[32m0.8 1 0 0 1 0 0 0.45 0 0.325 0 0 1 0 1 0 0 0 0.606667 0 0 1 0 0.295455 0 0 0 0 1 0 1 1 0 0 0 1 0[m
+[32m+[m[32m0.38 1 0 0 0 1 0 0.25 0 0.365385 0 0 0 0 0 0 1 0 0.386667 0 0 1 0 0.409091 0 0 1 0 0 0.333333 0 1 0 0 0 0 1[m
+[1mdiff --git a/NeuralWin/obj/Debug/DesignTimeResolveAssemblyReferences.cache b/NeuralWin/obj/Debug/DesignTimeResolveAssemblyReferences.cache[m
+[1mnew file mode 100644[m
+[1mindex 0000000..cc62433[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/DesignTimeResolveAssemblyReferences.cache differ
+[1mdiff --git a/NeuralWin/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache b/NeuralWin/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache[m
+[1mnew file mode 100644[m
+[1mindex 0000000..10a154e[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache differ
+[1mdiff --git a/NeuralWin/obj/Debug/NeuralWin.Properties.Resources.resources b/NeuralWin/obj/Debug/NeuralWin.Properties.Resources.resources[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6c05a97[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/NeuralWin.Properties.Resources.resources differ
+[1mdiff --git a/NeuralWin/obj/Debug/NeuralWin.UIMainForm.resources b/NeuralWin/obj/Debug/NeuralWin.UIMainForm.resources[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6c05a97[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/NeuralWin.UIMainForm.resources differ
+[1mdiff --git a/NeuralWin/obj/Debug/NeuralWin.csproj.FileListAbsolute.txt b/NeuralWin/obj/Debug/NeuralWin.csproj.FileListAbsolute.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e1dd9a5[m
+[1m--- /dev/null[m
+[1m+++ b/NeuralWin/obj/Debug/NeuralWin.csproj.FileListAbsolute.txt[m
+[36m@@ -0,0 +1,24 @@[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\bin\Debug\NeuralWin.exe[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\bin\Debug\NeuralWin.pdb[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.csprojResolveAssemblyReference.cache[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.Form1.resources[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.Properties.Resources.resources[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.csproj.GenerateResource.Cache[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.exe[m
+[32m+[m[32mc:\users\andrey\documents\visual studio 2012\Projects\Belousov\Neural\NeuralWin\obj\Debug\NeuralWin.pdb[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.exe[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.pdb[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.exe[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.pdb[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csprojResolveAssemblyReference.cache[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.Form1.resources[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.Properties.Resources.resources[m
+[32m+[m[32mC:\Users\Andrey\Documents\Visual Studio 2012\Projects\Belousov\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csproj.GenerateResource.Cache[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.exe[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.pdb[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.exe[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\bin\Debug\NeuralWin.pdb[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csprojResolveAssemblyReference.cache[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.Properties.Resources.resources[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.csproj.GenerateResource.Cache[m
+[32m+[m[32mC:\Учеба\Интелектуальные системы\Neural - Copy\NeuralWin\obj\Debug\NeuralWin.UIMainForm.resources[m
+[1mdiff --git a/NeuralWin/obj/Debug/NeuralWin.csproj.GenerateResource.Cache b/NeuralWin/obj/Debug/NeuralWin.csproj.GenerateResource.Cache[m
+[1mnew file mode 100644[m
+[1mindex 0000000..863dd97[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/NeuralWin.csproj.GenerateResource.Cache differ
+[1mdiff --git a/NeuralWin/obj/Debug/NeuralWin.csprojResolveAssemblyReference.cache b/NeuralWin/obj/Debug/NeuralWin.csprojResolveAssemblyReference.cache[m
+[1mnew file mode 100644[m
+[1mindex 0000000..316c7b3[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/NeuralWin.csprojResolveAssemblyReference.cache differ
+[1mdiff --git a/NeuralWin/obj/Debug/NeuralWin.exe b/NeuralWin/obj/Debug/NeuralWin.exe[m
+[1mnew file mode 100644[m
+[1mindex 0000000..dad310a[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/NeuralWin.exe differ
+[1mdiff --git a/NeuralWin/obj/Debug/NeuralWin.pdb b/NeuralWin/obj/Debug/NeuralWin.pdb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..60dfb8c[m
+Binary files /dev/null and b/NeuralWin/obj/Debug/NeuralWin.pdb differ
+[1mdiff --git "a/\320\230\320\275\321\202. \321\201\320\270\321\201. \320\233\320\260\320\261\320\276\321\200\320\260\321\202\320\276\321\200\320\275\320\260\321\217 \321\200\320\260\320\261\320\276\321\202\320\260 \342\204\2263.docx" "b/\320\230\320\275\321\202. \321\201\320\270\321\201. \320\233\320\260\320\261\320\276\321\200\320\260\321\202\320\276\321\200\320\275\320\260\321\217 \321\200\320\260\320\261\320\276\321\202\320\260 \342\204\2263.docx"[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7b39089[m
+[1m--- /dev/null[m
+[1m+++ "b/\320\230\320\275\321\202. \321\201\320\270\321\201. \320\233\320\260\320\261\320\276\321\200\320\260\321\202\320\276\321\200\320\275\320\260\321\217 \321\200\320\260\320\261\320\276\321\202\320\260 \342\204\2263.docx"[m	
+[36m@@ -0,0 +1,229 @@[m
+[32m+[m[32mМИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ[m
+[32m+[m[41m                                       [m
+[32m+[m[32mФедеральное государственное бюджетное образовательное учреждение[m
+[32m+[m[32m   высшего профессионального образования[m[41m [m
+[32m+[m[32m         <<НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ[m
+[32m+[m[32m    ТОМСКИЙ ПОЛИТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ>>[m
+[32m+[m[41m                                       [m
+[32m+[m[32mИнститут[m
+[32m+[m[32m -[m[41m [m
+[32m+[m[32mИнститут кибернетики[m
+[32m+[m[32mНаправление[m
+[32m+[m[32m -[m[41m [m
+[32m+[m[32mИнформатика и вычислительная техника[m
+[32m+[m[32mКафедра[m
+[32m+[m[32m -[m[41m [m
+[32m+[m[32mОптимизации систем управления[m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[32m   Отчет по лабораторной работе №3 на тему:[m
+[32m+[m[32m<<ПРИМЕНЕНИЕ ИСКУССТВЕННЫХ НЕЙРОННЫХ СЕТЕЙ ДЛЯ ОБРАБОТКИ ИНФОРМАЦИИ>>[m
+[32m+[m
+[32m+[m[32m                            Вариант heart{3}[m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m
+[32m+[m
+[32m+[m[32mСтудент гр. 8ВМ23[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32mМ.С. Бородин[m
+[32m+[m
+[32m+[m[41m                          [m
+[32m+[m
+[32m+[m[32m                               (Подпись)[m
+[32m+[m[41m                                       [m
+[32m+[m[32m                                  (Дата)[m
+[32m+[m[41m                                       [m
+[32m+[m[32m                            (И.О. Фамилия)[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m
+[32m+[m[32mПроверил[m
+[32m+[m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[41m                                       [m
+[32m+[m[32m                            А.А. Белоусов[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m                               (Подпись)[m
+[32m+[m[41m                                       [m
+[32m+[m[32m                                  (Дата)[m
+[32m+[m[41m                                       [m
+[32m+[m[32m                            (И.О.Фамилия)[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m                              Томск  -  2013[m
+[32m+[m[32mЗадание[m
+[32m+[m[32mС помощью нейронной сети с наличием как минимум одного скрытого слоя решить задачу заболевания сердца по входным данным.[m
+[32m+[m[32mРешение[m
+[32m+[m[32mНейронная сеть состоит из одинаковых нейронов. Каждый нейрон выглядит следующим образом:[m
+[32m+[m[41m                                       [m
+[32m+[m[32mНейрон сделан в виде класса Neuron. В нейроне содержатся веса связей, последние entrance значения, значение суммы и значение передаточной функции.[m
+[32m+[m[32mНейронная сеть имеет 3 слоя: входной (35 нейронов), скрытый (18 нейронов) и выходной (2 нейрона).[m[41m [m
+[32m+[m[32mРеализация рещения[m
+[32m+[m[32mВид формы:[m
+[32m+[m
+[32m+[m
+[32m+[m[32mКод класса Network[m
+[32m+[m[32mpublic class Network[m
+[32m+[m[32m    {[m
+[32m+[m[32m        public Neuron[] InputLayer = new Neuron[35];[m
+[32m+[m[32m        public Neuron[] IntermediateLayer = new Neuron[18];[m
+[32m+[m[32m        public Neuron[] OutputLayer = new Neuron[2];[m
+[32m+[m[41m [m
+[32m+[m[32m        public Network(int entrancesNumber)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var r = new Random();[m
+[32m+[m[32m            for (int i=0; i<InputLayer.Count(); i++)[m
+[32m+[m[32m                InputLayer[i] = new Neuron(entrancesNumber, r.Next(1000000));[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int i = 0; i < IntermediateLayer.Count(); i++)[m
+[32m+[m[32m                IntermediateLayer[i] = new Neuron(InputLayer.Count(), r.Next(1000000));[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int i = 0; i < OutputLayer.Count(); i++)[m
+[32m+[m[32m                OutputLayer[i] = new Neuron(IntermediateLayer.Count(), r.Next(1000000));[m[41m  [m
+[32m+[m[32m        }[m
+[32m+[m[41m [m
+[32m+[m[32m        public double[] Entrance(double[] entranceValue)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            foreach (var value in InputLayer)[m
+[32m+[m[32m                value.Entrance(entranceValue);[m
+[32m+[m[41m [m
+[32m+[m[32m            var intermediateResult = new double[InputLayer.Count()];[m
+[32m+[m[32m            for (int i = 0; i < InputLayer.Count(); i++)[m
+[32m+[m[32m                intermediateResult[i] = InputLayer[i].ActivateFunction();[m
+[32m+[m[41m [m
+[32m+[m[32m            foreach (var value in IntermediateLayer)[m
+[32m+[m[32m                value.Entrance(intermediateResult);[m
+[32m+[m[41m [m
+[32m+[m[32m            intermediateResult = new double[IntermediateLayer.Count()];[m
+[32m+[m[32m            for (int i = 0; i < IntermediateLayer.Count(); i++)[m
+[32m+[m[32m                intermediateResult[i] = IntermediateLayer[i].ActivateFunction();[m
+[32m+[m[41m [m
+[32m+[m[32m            foreach (var value in OutputLayer)[m
+[32m+[m[32m                value.Entrance(intermediateResult);[m
+[32m+[m[41m    [m
+[32m+[m[32m            intermediateResult = new double[OutputLayer.Count()];[m
+[32m+[m[32m            for (int i = 0; i < OutputLayer.Count(); i++)[m
+[32m+[m[32m                intermediateResult[i] = OutputLayer[i].ActivateFunction();[m
+[32m+[m[41m [m
+[32m+[m[32m            return intermediateResult;[m
+[32m+[m[32m        }[m
+[32m+[m[41m [m
+[32m+[m[32m        public void Teach(double[] entranceValues, double[] validValues)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var currentResultsOfNetworkWork = Entrance(entranceValues);[m
+[32m+[m[41m [m
+[32m+[m[32m            var errorOutputLayer = new double[2];[m
+[32m+[m[32m            //ошибка для выходного слоя[m
+[32m+[m[32m            double alfa = 1;[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int i = 0; i < errorOutputLayer.Count(); i++)[m
+[32m+[m[32m                errorOutputLayer[i] = alfa * currentResultsOfNetworkWork[i] * (1 - currentResultsOfNetworkWork[i])[m[41m [m
+[32m+[m[32m                    * (currentResultsOfNetworkWork[i] - validValues[i]);[m
+[32m+[m[41m [m
+[32m+[m[32m            var errorIntermediateLayer = new double[IntermediateLayer.Count()];[m
+[32m+[m[32m            //умножаем вес каждого нейрона на ошибку[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int i = 0; i < errorIntermediateLayer.Count(); i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                double weight = 0;[m
+[32m+[m[32m                for (int j = 0; j < OutputLayer.Count(); j++)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    weight += OutputLayer[j].EntrancesWeight[i] * errorOutputLayer[j];[m
+[32m+[m[32m                }[m
+[32m+[m[32m                errorIntermediateLayer[i] = alfa * IntermediateLayer[i].ActivateFunction() * (1 - IntermediateLayer[i].ActivateFunction()) * weight;[m
+[32m+[m[32m            }[m
+[32m+[m[41m [m
+[32m+[m[32m            var errorInputLayer = new double[InputLayer.Count()];[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int i = 0; i < errorInputLayer.Count(); i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                double weight = 0;[m
+[32m+[m[32m                for (int j = 0; j < IntermediateLayer.Count(); j++)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    weight += IntermediateLayer[j].EntrancesWeight[i] * errorIntermediateLayer[j];[m
+[32m+[m[32m                }[m
+[32m+[m[32m                errorInputLayer[i] = alfa * InputLayer[i].ActivateFunction() * (1 - InputLayer[i].ActivateFunction()) * weight;[m
+[32m+[m[32m            }[m
+[32m+[m[41m [m
+[32m+[m[32m            var h = 0.1;[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int j = 0; j < InputLayer.Count(); j++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                for (int i = 0; i < InputLayer[j].EntrancesWeight.Count(); i++)[m
+[32m+[m[32m                {[m
+[32m+[m[41m [m
+[32m+[m[32m                    var delta = (-1) * h * errorInputLayer[j] * InputLayer[j].EntranceValue[i];[m
+[32m+[m[32m                    InputLayer[j].EntrancesWeight[i] += delta;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int j = 0; j < IntermediateLayer.Count(); j++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                for (int i = 0; i < IntermediateLayer[j].EntrancesWeight.Count(); i++)[m
+[32m+[m[32m                {[m
+[32m+[m[41m [m
+[32m+[m[32m                    var delta = (-1) * h * errorIntermediateLayer[j] * IntermediateLayer[j].EntranceValue[i];[m
+[32m+[m[32m                    IntermediateLayer[j].EntrancesWeight[i] += delta;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[41m [m
+[32m+[m[32m            for (int j = 0; j < OutputLayer.Count(); j++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                for (int i = 0; i < OutputLayer[j].EntrancesWeight.Count(); i++)[m
+[32m+[m[32m                {[m
+[32m+[m[41m [m
+[32m+[m[32m                    var delta = (-1) * h * errorOutputLayer[j] * OutputLayer[j].EntranceValue[i];[m
+[32m+[m[32m                    OutputLayer[j].EntrancesWeight[i] += delta;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[41m [m
+[32m+[m[32m        }[m
+[32m+[m[41m [m
+[32m+[m[32m        public bool Validate(double[] entranceValues, double[] validValues)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var currentResultsOfNetworkWork = Entrance(entranceValues);[m
+[32m+[m[41m            [m
+[32m+[m[32m            var d = new double[2];[m
+[32m+[m[32m            if (currentResultsOfNetworkWork[0] >= currentResultsOfNetworkWork[1])[m
+[32m+[m[32m            {[m
+[32m+[m[32m                d[0] = 1;[m
+[32m+[m[32m                d[1] = 0;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else[m
+[32m+[m[32m            {[m
+[32m+[m[32m                d[0] = 0;[m
+[32m+[m[32m                d[1] = 1;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return ((validValues[0] == d[0]) && (validValues[1] == d[1]));[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32mВывод[m
+[32m+[m[32mНа практическом примере была реализована нейронная сеть для нахождения вероятности заболевания сердца Heart3. Задача была успешно решена, и после каждого обучения мы получали систему, работающую лучше, чем на прошлом шаге.[m
+
+[33mcommit ecba98e6b69899ba893b8efa6fbced0c9c7acef7[m
+Author: xjMavericKjx <maximaxim@tpu.ru>
+Date:   Mon Jan 28 07:28:50 2013 -0800
+
+    Initial commit
+
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bdc3535[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,108 @@[m
+[32m+[m[32m# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)[m
+[32m+[m[32m[Bb]in/[m
+[32m+[m[32m[Oo]bj/[m
+[32m+[m
+[32m+[m[32m# mstest test results[m
+[32m+[m[32mTestResults[m
+[32m+[m
+[32m+[m[32m## Ignore Visual Studio temporary files, build results, and[m
+[32m+[m[32m## files generated by popular Visual Studio add-ons.[m
+[32m+[m
+[32m+[m[32m# User-specific files[m
+[32m+[m[32m*.suo[m
+[32m+[m[32m*.user[m
+[32m+[m[32m*.sln.docstates[m
+[32m+[m
+[32m+[m[32m# Build results[m
+[32m+[m[32m[Dd]ebug/[m
+[32m+[m[32m[Rr]elease/[m
+[32m+[m[32mx64/[m
+[32m+[m[32m*_i.c[m
+[32m+[m[32m*_p.c[m
+[32m+[m[32m*.ilk[m
+[32m+[m[32m*.meta[m
+[32m+[m[32m*.obj[m
+[32m+[m[32m*.pch[m
+[32m+[m[32m*.pdb[m
+[32m+[m[32m*.pgc[m
+[32m+[m[32m*.pgd[m
+[32m+[m[32m*.rsp[m
+[32m+[m[32m*.sbr[m
+[32m+[m[32m*.tlb[m
+[32m+[m[32m*.tli[m
+[32m+[m[32m*.tlh[m
+[32m+[m[32m*.tmp[m
+[32m+[m[32m*.log[m
+[32m+[m[32m*.vspscc[m
+[32m+[m[32m*.vssscc[m
+[32m+[m[32m.builds[m
+[32m+[m
+[32m+[m[32m# Visual C++ cache files[m
+[32m+[m[32mipch/[m
+[32m+[m[32m*.aps[m
+[32m+[m[32m*.ncb[m
+[32m+[m[32m*.opensdf[m
+[32m+[m[32m*.sdf[m
+[32m+[m
+[32m+[m[32m# Visual Studio profiler[m
+[32m+[m[32m*.psess[m
+[32m+[m[32m*.vsp[m
+[32m+[m[32m*.vspx[m
+[32m+[m
+[32m+[m[32m# Guidance Automation Toolkit[m
+[32m+[m[32m*.gpState[m
+[32m+[m
+[32m+[m[32m# ReSharper is a .NET coding add-in[m
+[32m+[m[32m_ReSharper*[m
+[32m+[m
+[32m+[m[32m# NCrunch[m
+[32m+[m[32m*.ncrunch*[m
+[32m+[m[32m.*crunch*.local.xml[m
+[32m+[m
+[32m+[m[32m# Installshield output folder[m[41m [m
+[32m+[m[32m[Ee]xpress[m
+[32m+[m
+[32m+[m[32m# DocProject is a documentation generator add-in[m
+[32m+[m[32mDocProject/buildhelp/[m
+[32m+[m[32mDocProject/Help/*.HxT[m
+[32m+[m[32mDocProject/Help/*.HxC[m
+[32m+[m[32mDocProject/Help/*.hhc[m
+[32m+[m[32mDocProject/Help/*.hhk[m
+[32m+[m[32mDocProject/Help/*.hhp[m
+[32m+[m[32mDocProject/Help/Html2[m
+[32m+[m[32mDocProject/Help/html[m
+[32m+[m
+[32m+[m[32m# Click-Once directory[m
+[32m+[m[32mpublish[m
+[32m+[m
+[32m+[m[32m# Publish Web Output[m
+[32m+[m[32m*.Publish.xml[m
+[32m+[m
+[32m+[m[32m# NuGet Packages Directory[m
+[32m+[m[32mpackages[m
+[32m+[m
+[32m+[m[32m# Windows Azure Build Output[m
+[32m+[m[32mcsx[m
+[32m+[m[32m*.build.csdef[m
+[32m+[m
+[32m+[m[32m# Windows Store app package directory[m
+[32m+[m[32mAppPackages/[m
+[32m+[m
+[32m+[m[32m# Others[m
+[32m+[m[32m[Bb]in[m
+[32m+[m[32m[Oo]bj[m
+[32m+[m[32msql[m
+[32m+[m[32mTestResults[m
+[32m+[m[32m[Tt]est[Rr]esult*[m
+[32m+[m[32m*.Cache[m
+[32m+[m[32mClientBin[m
+[32m+[m[32m[Ss]tyle[Cc]op.*[m
+[32m+[m[32m~$*[m
+[32m+[m[32m*.dbmdl[m
+[32m+[m[32mGenerated_Code #added for RIA/Silverlight projects[m
+[32m+[m
+[32m+[m[32m# Backup & report files from converting an old project file to a newer[m
+[32m+[m[32m# Visual Studio version. Backup files are not needed, because we have git ;-)[m
+[32m+[m[32m_UpgradeReport_Files/[m
+[32m+[m[32mBackup*/[m
+[32m+[m[32mUpgradeLog*.XML[m
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8443dfe[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m[32mNeiroNetwork[m
+[32m+[m[32m============[m
+\ No newline at end of file[m
