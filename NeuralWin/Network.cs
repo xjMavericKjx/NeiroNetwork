@@ -21,7 +21,7 @@ namespace NeuralWin
         private void FillNeyronLayer(Neuron[] layer, Random rnd, int entrancesNumber)
         {
             for (int i = 0; i < layer.Count(); i++)
-                layer[i] = new Neuron(entrancesNumber, rnd.Next(1000000));
+                layer[i] = new Neuron(entrancesNumber, rnd.Next(10000));
         }
 
         public bool Validate(double[] entranceValues, double[] validValues)
